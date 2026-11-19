@@ -1,0 +1,1526 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark" />
+<link rel="icon" href="data:," />
+<title>IELTS Quiz Arena — Road to Band 8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0a1120; --bg2:#0e1830; --card:#121f3d; --card2:#16264a; --line:#24365e;
+  --ink:#eef2fb; --muted:#a9b7d4; --gold:#d4af6a; --teal:#2bb896; --orange:#f59e0b;
+  --green:#34c759; --red:#ef4456; --radius:16px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Serif Bengali",serif;line-height:1.55;-webkit-tap-highlight-color:transparent}
+button,[role="button"],select,input:not([type="checkbox"]){min-height:2.25rem;font-family:inherit}
+button{cursor:pointer}
+h1,h2,h3{line-height:1.25;margin:0}
+p{margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 64px}
+/* ---------- HERO ---------- */
+.hero{position:relative;overflow:hidden;border-radius:0 0 28px 28px;padding:44px 16px 30px;text-align:center;
+  background:linear-gradient(120deg,#0a1120,#13224a,#0d3b34,#3a2a10,#0a1120);background-size:300% 300%;animation:heroShift 16s ease infinite}
+@keyframes heroShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.hero h1{font-size:clamp(30px,6vw,52px);font-weight:800;letter-spacing:.5px}
+.hero h1 .gold{color:var(--gold)}
+.hero .sub{color:var(--muted);font-size:clamp(14px,2.6vw,18px);margin-top:8px}
+.hero-stats{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:22px}
+.hstat{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:8px 16px;font-size:14px;min-height:36px;display:flex;align-items:center;gap:6px}
+.hstat b{color:var(--gold);font-size:16px}
+.float-emoji{position:absolute;font-size:26px;opacity:.85;animation:floaty 5s ease-in-out infinite;pointer-events:none}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-14px) rotate(5deg)}}
+/* ---------- DASHBOARD ---------- */
+.dash{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:22px}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;text-align:center;transition:transform .25s,border-color .25s}
+.dcard:hover{transform:translateY(-4px);border-color:var(--gold)}
+.dcard .big{font-size:28px;font-weight:800;color:var(--gold)}
+.dcard .lbl{color:var(--muted);font-size:13.5px;margin-top:2px}
+.xpbar{height:9px;background:#0a1120;border-radius:99px;margin-top:10px;overflow:hidden}
+.xpbar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:99px;transition:width .6s}
+/* ---------- SECTIONS ---------- */
+section{margin-top:34px}
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(20px,4vw,26px);font-weight:700}
+.sec-head .hint{color:var(--muted);font-size:13.5px}
+/* ---------- SEARCH & FILTERS ---------- */
+.searchrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.searchbox{flex:1;min-width:220px;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 14px}
+.searchbox input{flex:1;background:none;border:none;color:var(--ink);font-size:16px;padding:10px 0;outline:none;font-family:inherit}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{background:var(--card);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:14px;min-height:38px;transition:all .2s}
+.chip:hover{border-color:var(--gold);color:var(--ink)}
+.chip.on{background:var(--gold);color:#14100a;border-color:var(--gold);font-weight:700}
+.chip.teal.on{background:var(--teal);border-color:var(--teal);color:#06231b}
+/* ---------- CARDS GRID ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:8px;transition:transform .25s,border-color .25s,box-shadow .25s;text-align:left;color:var(--ink);width:100%}
+.qcard:hover{transform:translateY(-5px);border-color:var(--gold);box-shadow:0 14px 30px rgba(0,0,0,.35)}
+.qcard .ic{font-size:30px}
+.qcard h3{font-size:17.5px;font-weight:700}
+.qcard .meta{color:var(--muted);font-size:13px;display:flex;gap:8px;flex-wrap:wrap}
+.tag{border:1px solid var(--line);border-radius:999px;padding:2px 10px;font-size:12px;color:var(--muted)}
+.tag.lv{color:var(--teal);border-color:var(--teal)}
+.tag.ct{color:var(--gold);border-color:var(--gold)}
+.qcard .best{color:var(--gold);font-size:13.5px;font-weight:700}
+.qcard .go{margin-top:auto;color:var(--orange);font-weight:700;font-size:14.5px}
+.qcard.special{background:linear-gradient(160deg,var(--card2),var(--card));border-color:#31487e}
+.qcard.special .go{color:var(--teal)}
+.empty-note{color:var(--muted);text-align:center;padding:26px;border:1px dashed var(--line);border-radius:var(--radius);grid-column:1/-1}
+/* ---------- HOW IT WORKS ---------- */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;text-align:center}
+.step .em{font-size:34px}
+.step h3{margin:8px 0 4px;font-size:16.5px}
+.step p{color:var(--muted);font-size:14px}
+/* ---------- BADGES ---------- */
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.badge{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;text-align:center;opacity:.45;filter:grayscale(.7)}
+.badge.got{opacity:1;filter:none;border-color:var(--gold)}
+.badge .em{font-size:30px}
+.badge h3{font-size:14.5px;margin-top:6px}
+.badge p{color:var(--muted);font-size:12.5px}
+/* ---------- BUTTONS ---------- */
+.btn{background:var(--gold);color:#171106;border:none;border-radius:12px;padding:11px 22px;font-size:15.5px;font-weight:700;min-height:44px;transition:transform .2s,filter .2s}
+.btn:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.btn.teal{background:var(--teal);color:#05231b}
+.btn.orange{background:var(--orange);color:#241300}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--gold)}
+.btn.danger{background:transparent;color:var(--red);border:1px solid var(--red)}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+/* ---------- VIEWS ---------- */
+.view{display:none}
+.view.on{display:block;animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;max-width:760px;margin:26px auto 0}
+.panel h2{font-size:clamp(20px,4.5vw,27px);font-weight:800}
+.backlink{background:none;border:none;color:var(--muted);font-size:15px;padding:10px 4px;min-height:44px}
+.backlink:hover{color:var(--gold)}
+.opt-group{margin-top:18px}
+.opt-group h3{font-size:15px;color:var(--muted);margin-bottom:8px;font-weight:600}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 18px;font-size:15px;min-height:44px}
+.seg button.on{background:var(--gold);color:#171106;border-color:var(--gold);font-weight:700}
+.switchrow{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:15px}
+.switch{position:relative;width:52px;height:30px;flex:none}
+.switch input{opacity:0;width:100%;height:100%;position:absolute;margin:0;cursor:pointer}
+.switch .tr{position:absolute;inset:0;background:#2a3a5f;border-radius:99px;transition:.25s;pointer-events:none}
+.switch .tr::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:.25s}
+.switch input:checked + .tr{background:var(--teal)}
+.switch input:checked + .tr::after{left:25px}
+/* ---------- QUIZ ---------- */
+.qtop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.qcount{font-weight:700;font-size:16px}
+.qtimer{font-weight:800;color:var(--orange);font-size:16px}
+.segbar{display:flex;gap:3px;margin:14px 0 4px}
+.segbar i{flex:1;height:9px;border-radius:99px;background:#2a3a5f;transition:background .3s}
+.segbar i.ok{background:var(--green)}
+.segbar i.bad{background:var(--red)}
+.segbar i.cur{background:var(--gold)}
+.timebar{height:8px;background:#2a3a5f;border-radius:99px;overflow:hidden;margin-top:10px}
+.timebar i{display:block;height:100%;background:var(--orange);transition:width 1s linear}
+.qtext{font-size:clamp(17px,3.4vw,20px);font-weight:600;margin:18px 0 16px;line-height:1.6}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--bg2);border:2px solid var(--line);border-radius:14px;padding:14px 16px;font-size:16px;color:var(--ink);min-height:52px;width:100%;transition:border-color .2s,background .2s,transform .15s}
+.opt:hover:not(:disabled){border-color:var(--gold);transform:translateX(3px)}
+.opt .key{flex:none;width:26px;height:26px;border-radius:8px;background:#22335c;color:var(--gold);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13.5px}
+.opt.correct{background:rgba(52,199,89,.14);border-color:var(--green)}
+.opt.correct .key{background:var(--green);color:#06280f}
+.opt.wrong{background:rgba(239,68,86,.13);border-color:var(--red)}
+.opt.wrong .key{background:var(--red);color:#2b060b}
+.opt:disabled{cursor:default;opacity:.92}
+.explain{display:none;margin-top:16px;background:rgba(43,184,150,.1);border:1px solid var(--teal);border-radius:14px;padding:14px 16px;font-size:15px}
+.explain.show{display:block;animation:fadeIn .3s}
+.explain b{color:var(--teal)}
+.typein{width:100%;background:var(--bg2);border:2px solid var(--line);border-radius:12px;color:var(--ink);font-size:17px;padding:13px 16px;font-family:inherit;outline:none}
+.typein:focus{border-color:var(--gold)}
+.typein.correct{border-color:var(--green);background:rgba(52,199,89,.12)}
+.typein.wrong{border-color:var(--red);background:rgba(239,68,86,.12)}
+.quizfoot{display:flex;justify-content:space-between;gap:10px;margin-top:20px;flex-wrap:wrap}
+/* ---------- RESULTS ---------- */
+.scorebig{font-size:clamp(44px,10vw,64px);font-weight:800;text-align:center;color:var(--gold)}
+.resultmsg{text-align:center;color:var(--muted);font-size:16.5px;margin-top:4px}
+.xpgain{text-align:center;color:var(--teal);font-weight:800;font-size:19px;margin-top:8px}
+.bandbox{text-align:center;background:rgba(212,175,106,.1);border:1px solid var(--gold);border-radius:14px;padding:14px;margin-top:16px}
+.bandbox .b{font-size:30px;font-weight:800;color:var(--gold)}
+.review{margin-top:22px;display:grid;gap:12px}
+.ritem{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:14.5px}
+.ritem .rq{font-weight:700;font-size:15.5px}
+.ritem .ok{color:var(--green)} .ritem .bad{color:var(--red)}
+.ritem .re{color:var(--muted);margin-top:4px}
+/* ---------- FLASHCARDS ---------- */
+.flashwrap{perspective:1200px;max-width:560px;margin:20px auto 0}
+.flash{position:relative;height:300px;transform-style:preserve-3d;transition:transform .6s;cursor:pointer}
+.flash.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;border:2px solid var(--line)}
+.face.front{background:linear-gradient(150deg,var(--card2),var(--card))}
+.face.back{background:linear-gradient(150deg,#0d3b34,var(--card));transform:rotateY(180deg);border-color:var(--teal)}
+.face .fw{font-size:clamp(24px,5vw,34px);font-weight:800;color:var(--gold)}
+.face .fm{font-size:18px;font-weight:700;color:var(--teal)}
+.face .fe{color:var(--muted);font-size:15px;margin-top:10px;font-style:italic}
+.face .tap{color:var(--muted);font-size:13px;margin-top:14px}
+.deckbar{height:10px;background:#2a3a5f;border-radius:99px;overflow:hidden;max-width:560px;margin:16px auto 0}
+.deckbar i{display:block;height:100%;background:var(--teal);transition:width .4s}
+/* ---------- PASSAGE / SPEAKING ---------- */
+.passage{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:18px;font-size:16px;line-height:1.75;margin-top:14px}
+.tfng{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.tfng button{flex:1;min-width:90px;background:var(--bg2);border:2px solid var(--line);color:var(--ink);border-radius:10px;padding:10px;font-size:15px;min-height:46px}
+.tfng button.on{border-color:var(--gold);background:rgba(212,175,106,.12);font-weight:700}
+.promptcard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:12px}
+.promptcard .pq{font-size:16.5px;font-weight:600}
+.promptcard ul{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:14.5px}
+.stars{display:flex;gap:4px;margin-top:10px}
+.stars button{background:none;border:none;font-size:26px;padding:4px;min-height:40px;min-width:40px;filter:grayscale(1);opacity:.5}
+.stars button.lit{filter:none;opacity:1}
+.bigtime{font-size:clamp(40px,9vw,58px);font-weight:800;text-align:center;color:var(--orange)}
+/* ---------- MODAL / TOAST ---------- */
+.modal-bg{position:fixed;inset:0;background:rgba(3,6,14,.78);display:none;align-items:center;justify-content:center;padding:16px;z-index:60}
+.modal-bg.on{display:flex}
+.modal{background:var(--card);border:1px solid var(--gold);border-radius:20px;max-width:560px;width:100%;max-height:88vh;overflow:auto;padding:24px}
+.modal h2{font-size:21px;margin-bottom:10px}
+.modal ol{padding-left:22px;color:var(--muted);font-size:15px;display:grid;gap:7px}
+.modal code{background:#0a1120;border:1px solid var(--line);border-radius:6px;padding:1px 7px;color:var(--gold);font-family:inherit;font-size:13.5px}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,120px);background:var(--card2);border:1px solid var(--gold);color:var(--ink);border-radius:14px;padding:13px 20px;font-size:15.5px;font-weight:700;z-index:80;transition:transform .45s;box-shadow:0 16px 40px rgba(0,0,0,.5);max-width:92vw;text-align:center}
+#toast.on{transform:translate(-50%,0)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:70;display:none}
+footer{margin-top:48px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:22px}
+footer b{color:var(--gold)}
+.backup-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+@media (max-width:560px){ .float-emoji{display:none} }
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HOME ================= -->
+<div id="view-home" class="view on">
+  <div class="hero">
+    <span class="float-emoji" style="top:16px;left:6%">📚</span>
+    <span class="float-emoji" style="top:54px;right:7%;animation-delay:1.2s">✈️</span>
+    <span class="float-emoji" style="bottom:18px;left:12%;animation-delay:2s">🏆</span>
+    <span class="float-emoji" style="bottom:26px;right:11%;animation-delay:.6s">💬</span>
+    <h1>IELTS Quiz <span class="gold">Arena</span> 🎯</h1>
+    <p class="sub">Road to Band 8 — Grammar • Vocabulary • Reading • Writing • Speaking</p>
+    <div class="hero-stats">
+      <span class="hstat">📝 মোট প্রশ্ন <b id="hs-total">290</b></span>
+      <span class="hstat">🗂️ কুইজ <b>16</b></span>
+      <span class="hstat">⭐ XP <b id="hs-xp">0</b></span>
+      <span class="hstat">🔥 স্ট্রিক <b id="hs-streak">0</b> দিন</span>
+      <span class="hstat">🎯 Accuracy <b id="hs-acc">—</b></span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <!-- Dashboard -->
+    <div class="dash" id="dash"></div>
+
+    <!-- Special modes -->
+    <section>
+      <div class="sec-head"><h2>⚡ স্পেশাল প্র্যাক্টিস মোড</h2><span class="hint">প্রতিদিনের চ্যালেঞ্জ, মক টেস্ট আর স্পিড গেম</span></div>
+      <div class="grid" id="special-grid"></div>
+    </section>
+
+    <!-- Quiz bank -->
+    <section>
+      <div class="sec-head"><h2>🗂️ কুইজ ব্যাংক</h2><span class="hint">16টি কুইজ • 240টি MCQ • প্রতিটি প্রশ্নে ব্যাখ্যা</span></div>
+      <div class="searchrow">
+        <label class="searchbox">🔍 <input id="search" type="search" placeholder="কুইজ খুঁজুন — যেমন: Tenses, Collocations, Passive…" aria-label="কুইজ খুঁজুন" /></label>
+        <button class="btn ghost" id="btn-github" type="button">🚀 GitHub-এ পাবলিশ করুন</button>
+      </div>
+      <div class="chips" id="cat-chips" role="group" aria-label="ক্যাটাগরি ফিল্টার"></div>
+      <div class="chips" id="lvl-chips" role="group" aria-label="লেভেল ফিল্টার"></div>
+      <div class="grid" id="quiz-grid" style="margin-top:14px"></div>
+    </section>
+
+    <!-- How it works -->
+    <section>
+      <div class="sec-head"><h2>🧭 কীভাবে কাজ করে</h2></div>
+      <div class="steps">
+        <div class="step"><div class="em">1️⃣</div><h3>কুইজ বেছে নিন</h3><p>16টি টপিক থেকে যেকোনো একটি সিলেক্ট করুন, প্রশ্নের সংখ্যা আর মোড (Practice / Timed) ঠিক করে Start চাপুন।</p></div>
+        <div class="step"><div class="em">2️⃣</div><h3>উত্তর দিন, ব্যাখ্যা পড়ুন</h3><p>প্রতিটি প্রশ্নের পরেই সঠিক উত্তর আর সহজ ব্যাখ্যা পাবেন। ভুলগুলো My Mistakes-এ জমা হবে পরে প্র্যাক্টিসের জন্য।</p></div>
+        <div class="step"><div class="em">3️⃣</div><h3>XP আর ব্যাজ জিতুন</h3><p>সঠিক উত্তরে XP, 80%+ স্কোরে বোনাস আর কনফেটি! স্ট্রিক ধরে রাখুন, ব্যাজ আনলক করুন, Band 8-এর দিকে এগিয়ে যান।</p></div>
+      </div>
+    </section>
+
+    <!-- Badges -->
+    <section>
+      <div class="sec-head"><h2>🏆 আমার ব্যাজ</h2><span class="hint" id="badge-count"></span></div>
+      <div class="badges" id="badge-grid"></div>
+    </section>
+
+    <!-- Backup -->
+    <section>
+      <div class="sec-head"><h2>💾 ব্যাকআপ ও রিস্টোর</h2><span class="hint">সব প্রোগ্রেস এই ব্রাউজারেই সেভ থাকে</span></div>
+      <div class="backup-grid">
+        <button class="btn ghost" id="btn-backup" type="button">⬇️ ব্যাকআপ ডাউনলোড (JSON)</button>
+        <button class="btn ghost" id="btn-restore" type="button">⬆️ ব্যাকআপ রিস্টোর করুন</button>
+        <button class="btn ghost" id="btn-export" type="button">📋 ফলাফলের সারাংশ কপি করুন</button>
+        <button class="btn danger" id="btn-reset" type="button">🗑️ সব প্রোগ্রেস মুছুন</button>
+      </div>
+      <input type="file" id="restore-file" accept=".json,application/json" style="display:none" />
+    </section>
+
+    <footer>
+      <p>🎓 <b>Made by Ariful</b> — Chemistry, University of Barishal</p>
+      <p style="margin-top:4px">IELTS Quiz Arena — Road to Band 8 • প্রতিদিন একটু একটু করে প্র্যাক্টিসই সাফল্যের চাবিকাঠি 🔑</p>
+    </footer>
+  </div>
+</div>
+
+<!-- ================= SETUP ================= -->
+<div id="view-setup" class="view">
+  <div class="wrap">
+    <button class="backlink" data-go="home" type="button">← সব কুইজে ফিরুন</button>
+    <div class="panel">
+      <div style="font-size:38px" id="setup-icon">📝</div>
+      <h2 id="setup-title">Quiz</h2>
+      <p style="color:var(--muted);margin-top:6px" id="setup-meta"></p>
+      <p style="color:var(--gold);font-weight:700;margin-top:6px" id="setup-best"></p>
+      <div class="opt-group"><h3>প্রশ্নের সংখ্যা</h3>
+        <div class="seg" id="setup-count">
+          <button type="button" data-v="10">10টি</button>
+          <button type="button" data-v="15" class="on">15টি</button>
+          <button type="button" data-v="all">সবগুলো</button>
+        </div>
+      </div>
+      <div class="opt-group"><h3>মোড</h3>
+        <div class="seg" id="setup-mode">
+          <button type="button" data-v="practice" class="on">🧘 Practice — টাইমার নেই, প্রতি প্রশ্নে ব্যাখ্যা</button>
+          <button type="button" data-v="timed">⏱️ Timed Exam — প্রতি প্রশ্নে 30 সেকেন্ড</button>
+        </div>
+      </div>
+      <label class="switchrow"><span class="switch"><input type="checkbox" id="setup-shuffle" checked /><span class="tr"></span></span> প্রশ্নের ক্রম এলোমেলো করুন (Shuffle)</label>
+      <div class="btnrow" style="margin-top:24px">
+        <button class="btn" id="btn-start" type="button">▶️ কুইজ শুরু করুন</button>
+        <button class="btn teal" id="btn-resume" type="button" style="display:none">⏩ আগের জায়গা থেকে চালিয়ে যান (Resume)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= QUIZ ================= -->
+<div id="view-quiz" class="view">
+  <div class="wrap">
+    <div class="panel" style="max-width:820px">
+      <div class="qtop">
+        <span class="qcount" id="q-count">Question 1 of 15</span>
+        <span class="qtimer" id="q-timer"></span>
+        <span class="qtimer" id="q-combo" style="color:var(--gold)"></span>
+      </div>
+      <div class="segbar" id="q-segbar"></div>
+      <div class="timebar" id="q-timebar" style="display:none"><i id="q-timefill"></i></div>
+      <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">
+        <span class="tag ct" id="q-cat"></span><span class="tag lv" id="q-lvl"></span>
+      </div>
+      <p class="qtext" id="q-text"></p>
+      <div class="opts" id="q-opts"></div>
+      <div id="q-typewrap" style="display:none">
+        <input class="typein" id="q-typein" type="text" placeholder="এখানে উত্তর টাইপ করুন…" autocomplete="off" />
+        <div class="btnrow" style="margin-top:10px"><button class="btn teal" id="btn-check-type" type="button">✓ উত্তর যাচাই করুন</button></div>
+      </div>
+      <div class="explain" id="q-explain"></div>
+      <div class="quizfoot">
+        <button class="btn ghost" id="btn-quit" type="button">← Quit</button>
+        <button class="btn" id="btn-next" type="button" style="display:none">Next →</button>
+      </div>
+      <p style="color:var(--muted);font-size:13px;margin-top:12px" id="q-kbdhint">⌨️ কীবোর্ড: 1–4 দিয়ে উত্তর, Enter দিয়ে পরের প্রশ্ন</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= RESULT ================= -->
+<div id="view-result" class="view">
+  <div class="wrap">
+    <div class="panel" style="max-width:820px">
+      <h2 style="text-align:center" id="r-title">ফলাফল</h2>
+      <div class="scorebig" id="r-score">0/15</div>
+      <p class="resultmsg" id="r-msg"></p>
+      <p class="xpgain" id="r-xp"></p>
+      <div class="bandbox" id="r-band" style="display:none">
+        <div style="color:var(--muted);font-size:13.5px">আনুমানিক IELTS Band (শুধু ধারণার জন্য — অফিসিয়াল স্কোর নয়)</div>
+        <div class="b" id="r-bandval">Band 7.0</div>
+      </div>
+      <div class="btnrow" style="justify-content:center;margin-top:22px">
+        <button class="btn" id="btn-again" type="button">🔁 Try Again</button>
+        <button class="btn teal" id="btn-nextquiz" type="button">⏭️ Next Quiz</button>
+        <button class="btn orange" id="btn-gomistakes" type="button">❤️‍🩹 Practise My Mistakes</button>
+        <button class="btn ghost" data-go="home" type="button">🗂️ All Quizzes</button>
+      </div>
+      <h3 style="margin-top:28px;font-size:18px">📋 সম্পূর্ণ রিভিউ</h3>
+      <div class="review" id="r-review"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FLASHCARDS ================= -->
+<div id="view-flash" class="view">
+  <div class="wrap">
+    <button class="backlink" data-go="home" type="button">← হোমে ফিরুন</button>
+    <div class="panel" style="text-align:center">
+      <h2>🃏 Vocabulary Flashcards</h2>
+      <p style="color:var(--muted);margin-top:6px">কার্ডে ট্যাপ করলেই উল্টে অর্থ আর উদাহরণ দেখা যাবে। জানা থাকলে “Know it”, না জানলে “Still learning” চাপুন।</p>
+      <div class="deckbar"><i id="deck-fill"></i></div>
+      <p style="color:var(--muted);font-size:14px;margin-top:8px" id="deck-count"></p>
+      <div class="flashwrap">
+        <div class="flash" id="flash-card" role="button" tabindex="0" aria-label="Flashcard — flip করতে ট্যাপ করুন">
+          <div class="face front"><div class="fw" id="flash-front"></div><div class="tap">👆 ট্যাপ করে অর্থ দেখুন</div></div>
+          <div class="face back"><div class="fm" id="flash-back"></div><div class="fe" id="flash-ex"></div></div>
+        </div>
+      </div>
+      <div class="btnrow" style="justify-content:center;margin-top:20px">
+        <button class="btn danger" id="btn-flash-no" type="button" style="color:var(--red)">✗ Still learning</button>
+        <button class="btn teal" id="btn-flash-yes" type="button">✓ Know it</button>
+      </div>
+      <p style="color:var(--teal);font-weight:700;margin-top:14px" id="flash-done"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= READING / LISTENING ================= -->
+<div id="view-passage" class="view">
+  <div class="wrap">
+    <button class="backlink" data-go="home" type="button">← হোমে ফিরুন</button>
+    <div class="panel" style="max-width:820px">
+      <h2 id="p-title"></h2>
+      <p style="color:var(--muted);margin-top:4px" id="p-sub"></p>
+      <div class="passage" id="p-text"></div>
+      <div id="p-qs"></div>
+      <div class="btnrow" style="margin-top:20px">
+        <button class="btn" id="btn-p-check" type="button">✓ উত্তর যাচাই করুন</button>
+        <button class="btn ghost" id="btn-p-reset" type="button">↺ আবার চেষ্টা</button>
+      </div>
+      <p class="xpgain" id="p-result"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SPEAKING ================= -->
+<div id="view-speaking" class="view">
+  <div class="wrap">
+    <button class="backlink" data-go="home" type="button">← হোমে ফিরুন</button>
+    <div class="panel" style="max-width:820px">
+      <h2>🗣️ Speaking Prompt Bank</h2>
+      <p style="color:var(--muted);margin-top:6px">30টি প্রম্পট — Part 1 (15), Part 2 Cue Card (10), Part 3 (5)। জোরে জোরে উত্তর বলুন, তারপর নিজেকে ⭐ রেটিং দিন।</p>
+      <div class="chips" id="sp-chips" style="margin-top:14px">
+        <button class="chip on" type="button" data-part="1">Part 1 — পরিচিতি</button>
+        <button class="chip" type="button" data-part="2">Part 2 — Cue Card</button>
+        <button class="chip" type="button" data-part="3">Part 3 — আলোচনা</button>
+      </div>
+      <div id="sp-timer" style="display:none;margin-top:18px">
+        <div class="bigtime" id="sp-time">1:00</div>
+        <p style="text-align:center;color:var(--muted)" id="sp-phase">প্রস্তুতির সময় (Prep)</p>
+        <div class="btnrow" style="justify-content:center;margin-top:10px">
+          <button class="btn orange" id="btn-sp-start" type="button">▶️ টাইমার শুরু (1 মিনিট প্রস্তুতি + 2 মিনিট বলা)</button>
+          <button class="btn ghost" id="btn-sp-stop" type="button">⏹ থামান</button>
+        </div>
+      </div>
+      <div id="sp-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MISTAKES LIST ================= -->
+<div id="view-mistakes" class="view">
+  <div class="wrap">
+    <button class="backlink" data-go="home" type="button">← হোমে ফিরুন</button>
+    <div class="panel" style="max-width:820px">
+      <h2>❤️‍🩹 My Mistakes</h2>
+      <p style="color:var(--muted);margin-top:6px">ভুল করা প্রশ্নগুলো এখানে জমা থাকে। টানা <b>2 বার</b> সঠিক উত্তর দিলেই প্রশ্নটি এই তালিকা থেকে মুছে যাবে।</p>
+      <div class="btnrow" style="margin-top:16px">
+        <button class="btn orange" id="btn-mistake-practice" type="button">▶️ ভুলগুলো প্র্যাক্টিস করুন</button>
+      </div>
+      <div id="mistake-list" style="margin-top:18px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MODALS ================= -->
+<div class="modal-bg" id="modal-github">
+  <div class="modal">
+    <h2>🚀 GitHub Pages-এ ফ্রি পাবলিশ করুন</h2>
+    <ol>
+      <li><code>github.com</code>-এ লগইন করে <b>New repository</b> তৈরি করুন (যেমন নাম দিন <code>ielts-quiz-arena</code>)।</li>
+      <li>রিপোজিটরিতে <b>Add file → Upload files</b> দিয়ে এই পেজের <code>index.html</code> ফাইলটি আপলোড করুন।</li>
+      <li><b>Commit changes</b> চাপুন।</li>
+      <li>রিপোজিটরির <b>Settings → Pages</b>-এ যান।</li>
+      <li><b>Build and deployment → Source: Deploy from a branch</b> সিলেক্ট করুন।</li>
+      <li>Branch: <code>main</code>, Folder: <code>/(root)</code> দিয়ে <b>Save</b> করুন।</li>
+      <li>১–২ মিনিট অপেক্ষা করুন, তারপর খুলুন: <code>https://username.github.io/repo-name/</code> (username ও repo-name নিজেরটা বসান)।</li>
+    </ol>
+    <p style="color:var(--muted);font-size:14px;margin-top:10px">ব্যস! আপনার কুইজ সাইট লাইভ 🎉 — লিংকটা বন্ধুদের সঙ্গে শেয়ার করুন।</p>
+    <div class="btnrow" style="margin-top:16px"><button class="btn" data-close="modal-github" type="button">বুঝেছি ✓</button></div>
+  </div>
+</div>
+
+<div class="modal-bg" id="modal-confirm">
+  <div class="modal">
+    <h2 id="confirm-title">নিশ্চিত করুন</h2>
+    <p style="color:var(--muted)" id="confirm-text"></p>
+    <div class="btnrow" style="margin-top:18px">
+      <button class="btn ghost" data-close="modal-confirm" type="button">না, ফিরে যাই</button>
+      <button class="btn danger" id="btn-confirm-yes" type="button" style="color:#fff;background:var(--red);border:none">হ্যাঁ, নিশ্চিত</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" role="status"></div>
+<canvas id="confetti" width="1200" height="800"></canvas>
+
+<script>
+"use strict";
+/* =====================================================================
+   IELTS Quiz Arena — original question bank (written fresh for this site)
+   MCQ format: [question, [4 options], correctIndex, explanation]
+   Type format: {t:1, q, a:[accepted answers], e}
+===================================================================== */
+var QUIZZES = [
+{ id:"pos", icon:"🧩", title:"Parts of Speech", cat:"Grammar", level:"Foundation", questions:[
+["In the sentence “The curious scientist carefully examined the sample”, the word “curious” is a/an ___ .",["noun","adjective","adverb","verb"],1,"“Curious” describes the noun “scientist”, and words that describe nouns are adjectives."],
+["In “She speaks softly during presentations”, the word “softly” is a/an ___ .",["adjective","noun","adverb","pronoun"],2,"“Softly” tells us how she speaks, so it modifies the verb and is an adverb of manner."],
+["Which of the following words is a pronoun?",["happiness","they","quickly","under"],1,"“They” stands in place of a noun, which is exactly what a pronoun does."],
+["In “Wow! That was an incredible save”, the word “Wow” is a/an ___ .",["conjunction","preposition","interjection","article"],2,"“Wow” expresses a sudden emotion and stands apart from the sentence — that is an interjection."],
+["In “The cat hid under the bridge”, the word “under” is a/an ___ .",["preposition","adverb","conjunction","verb"],0,"“Under” shows the position of the cat in relation to the bridge, so it is a preposition."],
+["Which group of words is the verb in “The committee has approved the new budget”?",["the committee","has approved","the new budget","new"],1,"“Has approved” is the verb phrase — it shows the action done by the committee."],
+["The word “happiness” is an example of a/an ___ noun.",["proper","concrete","abstract","collective"],2,"Happiness is a feeling that cannot be touched or seen, so it is an abstract noun."],
+["In “Five students joined the science club”, the word “Five” functions as a/an ___ .",["adjective","adverb","noun","verb"],0,"“Five” gives the number of the noun “students”, so it works as an adjective of number (a determiner)."],
+["Which word is a conjunction in “I wanted to join, but the class was full”?",["wanted","but","class","full"],1,"“But” joins two clauses and shows contrast, so it is a conjunction."],
+["In “Their house is near the river”, the word “Their” is a/an ___ .",["pronoun used as subject","possessive adjective","adverb","preposition"],1,"“Their” comes before the noun “house” and shows possession, so it is a possessive adjective."],
+["Which of these is a proper noun?",["city","river","Dhaka","country"],2,"“Dhaka” is the specific name of one city, so it is a proper noun and takes a capital letter."],
+["In the command “Run! The bus is leaving”, the word “Run” is a/an ___ .",["noun","adjective","verb","pronoun"],2,"“Run” expresses an action (here, a command), so it is a verb."],
+["In “She sings beautifully”, the word “beautifully” modifies the ___ .",["noun “she”","verb “sings”","whole sentence only","nothing"],1,"“Beautifully” describes how she sings, so the adverb modifies the verb “sings”."],
+["Which sentence contains a collective noun?",["The boy kicked the ball.","A flock of birds flew over the field.","She is very kind.","They ran quickly."],1,"“Flock” names a group of birds as one unit, which makes it a collective noun."],
+["In “Reading improves the mind”, the word “Reading” acts as a/an ___ .",["adverb","noun (gerund)","preposition","conjunction"],1,"“Reading” is a verb form used as the subject of the sentence, so it works as a noun (a gerund)."]
+]},
+{ id:"art", icon:"📰", title:"Articles (a / an / the)", cat:"Grammar", level:"Foundation", questions:[
+["She is ___ honest person, so everyone trusts her.",["a","an","the","no article"],1,"“Honest” begins with a silent h, so the first sound is a vowel sound — use “an”."],
+["___ sun rises in the east and sets in the west.",["A","An","The","No article"],2,"There is only one sun, and unique things take “the”."],
+["My younger brother plays ___ guitar very well.",["a","an","the","no article"],2,"Musical instruments are usually used with “the”: play the guitar, play the piano."],
+["I watched ___ interesting movie last night.",["a","an","the","no article"],1,"“Interesting” starts with a vowel sound and the movie is mentioned for the first time, so use “an”."],
+["___ Mount Everest is the highest peak in the world.",["The","A","An","No article"],3,"Names of single mountains do not take an article: Mount Everest, Mount Fuji."],
+["Rina goes to ___ school by bus every morning. (She is a student there.)",["a","the","an","no article"],3,"When school is visited for its main purpose (studying), no article is used: go to school."],
+["He is ___ best student in our class.",["a","an","the","no article"],2,"Superlatives (best, first, tallest) always take “the”."],
+["___ water is essential for all living beings. (in general)",["The","A","An","No article"],3,"Uncountable nouns used in a general sense take no article."],
+["Could you lend me ___ umbrella? It is raining outside.",["a","an","the","no article"],1,"“Umbrella” starts with a vowel sound and is one of many, so use “an”."],
+["Please put the keys on ___ table near the door.",["a","an","the","no article"],2,"Both speaker and listener know which table is meant, so the specific noun takes “the”."],
+["After the election, he became ___ president of the club.",["a","the","an","no article"],3,"Unique posts used as complements after verbs like become/elect take no article: became president."],
+["___ tiger is a protected species in Bangladesh. (the species as a whole)",["A","An","The","No article"],2,"“The + singular noun” can represent a whole species: the tiger, the elephant."],
+{t:1,q:"Type the missing article: “She bought ___ orange from the market.”",a:["an"],e:"“Orange” begins with a vowel sound, so the article is “an”."},
+{t:1,q:"Type the missing article: “___ Ganges is a sacred river in South Asia.”",a:["the"],e:"Names of rivers always take “the”: the Ganges, the Padma, the Thames."},
+{t:1,q:"Type what belongs in the gap — an article, or the words “no article”: “He speaks ___ English fluently.”",a:["no article"],e:"Language names take no article: speak English, speak Bengali."}
+]},
+{ id:"sva", icon:"⚖️", title:"Subject–Verb Agreement", cat:"Grammar", level:"Foundation", questions:[
+["The list of items ___ on the teacher's desk.",["are","is","were","have"],1,"The subject is “list” (singular), not “items”, so the verb is “is”."],
+["Neither the teacher nor the students ___ present in the hall.",["was","were","is","has been"],1,"With “neither…nor”, the verb agrees with the nearer subject — “students” is plural, so “were”."],
+["Each of the boys ___ a separate notebook.",["have","has","are having","were"],1,"“Each” is always singular, so it takes “has”."],
+["The news from the village ___ very surprising.",["were","are","was","have been"],2,"“News” looks plural but is an uncountable singular noun, so it takes “was”."],
+["Ten kilometres ___ a long distance to walk in this heat.",["are","is","were","seem"],1,"A measured amount seen as one unit takes a singular verb: “is”."],
+["The quality of these mangoes ___ excellent this year.",["are","were","is","have"],2,"The head subject is “quality” (singular); the phrase after “of” does not change it."],
+["Either of the two answers ___ acceptable.",["are","were","is","seem"],2,"“Either” referring to one of two is singular, so use “is”."],
+["A number of students ___ absent from class today.",["was","were","is","has been"],1,"“A number of” means “many” and takes a plural verb — “were”."],
+["The number of applicants ___ increasing every year.",["are","were","is","have"],2,"“The number of” points to one figure, so the verb is singular: “is”."],
+["Physics ___ my favourite subject at school.",["are","were","is","have been"],2,"Subject names ending in -ics (physics, mathematics) are singular here, so “is”."],
+["Everyone in the team ___ already arrived.",["have","has","are","were"],1,"“Everyone” is an indefinite singular pronoun and takes “has”."],
+["The police ___ investigating the case carefully.",["is","was","are","has"],2,"“Police” is always plural in English, so it takes “are”."],
+["My brother, along with his friends, ___ coming to the fair.",["are","were","is","have"],2,"Phrases like “along with” do not change the subject — “brother” is singular, so “is”."],
+["Rice and curry ___ my usual lunch. (one combined dish)",["are","were","is","seem"],2,"Two items forming one single dish are treated as singular, so “is”."],
+["There ___ many reasons for his success.",["is","was","are","seems"],2,"In “there” sentences the verb agrees with the real subject after it — “reasons” is plural, so “are”."]
+]},
+{ id:"tense", icon:"⏰", title:"Tenses", cat:"Grammar", level:"Foundation", questions:[
+["She ___ to her office by bus every working day.",["go","goes","went","is go"],1,"Habitual actions in the present take the present simple; with “she” we add -s: “goes”."],
+["I ___ an old friend at the book fair yesterday.",["meet","meets","met","have meet"],2,"“Yesterday” signals a finished past action, so use the past simple “met”."],
+["They ___ television when the power went out.",["watch","are watching","were watching","have watched"],2,"An action in progress at a past moment takes the past continuous: “were watching”."],
+["By 2030, researchers ___ a cure for this disease, we hope.",["will find","will have found","found","finds"],1,"An action completed before a future point takes the future perfect: “will have found”."],
+["He ___ in this town since 2019.",["lives","lived","has been living","is live"],2,"An action that began in the past and continues now takes the present perfect continuous: “has been living”."],
+["The train ___ before we reached the station.",["leaves","has left","had left","is leaving"],2,"The earlier of two past actions takes the past perfect: “had left”."],
+["Look! The baby ___ because she is hungry.",["cries","is crying","cried","cry"],1,"“Look!” points to an action happening right now — present continuous “is crying”."],
+["I ___ my assignment yet, so I cannot go out.",["didn't finish","haven't finished","don't finish","am not finish"],1,"“Yet” with an unfinished present situation takes the present perfect: “haven't finished”."],
+["We have bought the tickets, so we ___ to Cox's Bazar tomorrow.",["go","are going","went","goes"],1,"A fixed plan for the near future is expressed with the present continuous: “are going”."],
+["Water ___ at 100 degrees Celsius.",["is boiling","boils","boiled","will boil"],1,"Scientific facts and general truths use the present simple: “boils”."],
+["While I ___ dinner, the doorbell rang.",["cook","was cooking","have cooked","cooks"],1,"A longer background action interrupted by a short one takes the past continuous: “was cooking”."],
+["He told me that he ___ very busy that day.",["is","was","will be","be"],1,"In reported speech, present “am/is” shifts back to “was”."],
+["This time tomorrow, we ___ beside the sea.",["sit","sat","will be sitting","have sat"],2,"An action in progress at a specific future moment takes the future continuous: “will be sitting”."],
+["Which sentence is grammatically correct?",["I have never eaten sushi before.","I never ate sushi yesterday before.","I has never eaten sushi.","I am never eat sushi before."],0,"“Have never eaten” is the correct present perfect form for life experience up to now."],
+["She ___ three short stories so far this year.",["writes","wrote yesterday","has written","is write"],2,"“So far” connects the past to the present, so the present perfect “has written” is correct."]
+]}
+];
+QUIZZES.push(
+{ id:"cond", icon:"🔀", title:"Conditionals", cat:"Grammar", level:"Intermediate", questions:[
+["If it rains tomorrow, we ___ the picnic.",["would cancel","will cancel","cancelled","had cancelled"],1,"This is a first conditional (real future possibility): if + present simple, will + verb."],
+["If I ___ rich, I would build a library in my village.",["am","was","were","will be"],2,"Second conditional (imaginary present) uses “were” for all persons after if."],
+["If she had revised more, she ___ the exam easily.",["will pass","would pass","would have passed","passes"],2,"Third conditional (past regret): if + past perfect, would have + past participle."],
+["If you heat ice, it ___.",["will melt","melts","would melt","melted"],1,"Zero conditional states a scientific fact: if + present simple, present simple."],
+["If he ___ earlier, he would have caught the last bus.",["leaves","had left","would leave","left yesterday"],1,"The missed bus is a past event, so the if-clause needs the past perfect “had left”."],
+["___ you hurry, you will miss the train.",["If","Unless","When","Because"],1,"“Unless” means “if…not”: If you do not hurry, you will miss the train."],
+["If I see Rahim today, I ___ him your message.",["would give","will give","gave","had given"],1,"A likely future condition takes the first conditional: will give."],
+["I wish I ___ play the piano like my sister.",["can","could","will","am"],1,"Wishes about present ability use “could” after “I wish”."],
+["If they ___ the map carefully, they would not have got lost.",["check","had checked","would check","checks"],1,"Getting lost already happened, so this is a third conditional: “had checked”."],
+["___ that you finish your work early, you may leave the office.",["Provided","Unless","Despite","Because"],0,"“Provided that” introduces a condition with the meaning “only if”."],
+["If the temperature falls below zero, water ___.",["froze","freezes","would freeze","will froze"],1,"A general truth takes the zero conditional: “freezes”."],
+["“If I were you, I would apologise.” — This sentence gives ___.",["an order","advice","a promise","a warning about weather"],1,"“If I were you, I would…” is the standard pattern for giving advice."],
+["If he had driven more carefully, he ___ the accident.",["will avoid","would avoid","would have avoided","avoids"],2,"A past hypothetical result needs “would have + past participle”."],
+["If she ___ to the party tomorrow, we will celebrate together.",["comes","will come","came","would come"],0,"In first conditionals, the if-clause uses the present simple even for future time: “comes”."],
+["___ I known about the traffic jam, I would have left home earlier.",["If","Had","Would","Did"],1,"Third conditionals can be inverted by putting “Had” first and dropping “if”."]
+]},
+{ id:"prep", icon:"🧭", title:"Prepositions", cat:"Grammar", level:"Intermediate", questions:[
+["She is deeply interested ___ ancient history.",["on","in","at","about"],1,"The fixed preposition with “interested” is “in”: interested in something."],
+["My cousin is very good ___ mathematics.",["in","on","at","with"],2,"We say “good at” a subject or skill, and “bad at” for the opposite."],
+["Success in the exam depends ___ regular practice.",["in","on","at","from"],1,"“Depend” is always followed by “on”."],
+["We finally arrived ___ the station just before the train left.",["in","to","at","on"],2,"We arrive “at” a specific point like a station, but “in” a city or country."],
+["Many children are afraid ___ spiders.",["from","of","with","by"],1,"The adjective “afraid” takes “of”: afraid of spiders."],
+["She got married ___ a doctor last winter.",["with","to","by","for"],1,"In modern English we say “married to” someone."],
+["The train arrived exactly ___ time, at 7:30 sharp.",["in","on","at","by"],1,"“On time” means at the scheduled time; “in time” means before a deadline."],
+["He goes to his village ___ foot every Eid.",["by","with","on","in"],2,"We say “by car/bus” but “on foot” — foot is the exception."],
+["Please divide this cake ___ the two brothers fairly.",["among","between","within","across"],1,"“Between” is used for two people or things; “among” is for more than two."],
+["They have been living in this house ___ 2015.",["for","from","since","by"],2,"“Since” is used with a starting point in time; “for” is used with a duration."],
+["I have known him ___ more than ten years.",["since","for","from","at"],1,"A length of time (ten years) takes “for”, not “since”."],
+["I am looking forward ___ hearing from you soon.",["for","to","at","with"],1,"In “look forward to”, the word “to” is a preposition, so it is followed by a verb-ing."],
+["This salad consists ___ rice, vegetables and eggs.",["from","in","of","with"],2,"“Consist” takes “of”: consists of."],
+["We will start the class ___ Monday morning.",["in","at","on","by"],2,"Days and parts of a specific day take “on”: on Monday morning."],
+["He apologised ___ his teacher ___ being late.",["with … about","to … for","for … to","at … on"],1,"We apologise “to” a person “for” a mistake: apologised to his teacher for being late."]
+]},
+{ id:"passive", icon:"🔄", title:"Passive Voice", cat:"Grammar", level:"Intermediate", questions:[
+["Choose the correct passive form of: “Someone stole my bicycle.”",["My bicycle is stole.","My bicycle was stolen.","My bicycle has stole.","My bicycle was steal."],1,"Past simple active becomes was/were + past participle: “was stolen”."],
+["“They are building a new bridge here.” → The passive form is:",["A new bridge is being built here.","A new bridge is built here yesterday.","A new bridge was being built here.","A new bridge has being built here."],0,"Present continuous passive = is/are being + past participle."],
+["“She has written three novels.” → In passive:",["Three novels are written by her.","Three novels have been written by her.","Three novels has been written by her.","Three novels were being written by her."],1,"Present perfect passive = have/has been + past participle."],
+["“The head teacher will announce the results tomorrow.” →",["The results will announced tomorrow.","The results will be announced tomorrow.","The results would announced tomorrow.","The results are announce tomorrow."],1,"Future passive = will be + past participle: “will be announced”."],
+["Which of these sentences is in the passive voice?",["The farmer grows rice.","The letter was delivered this morning.","Children love this game.","She opened the window."],1,"“Was delivered” shows the subject receiving the action — that is passive."],
+["“People speak English in many countries.” →",["English is spoken in many countries.","English speaks in many countries.","English is speaking in many countries.","English was speak in many countries."],0,"Present simple passive = is/are + past participle: “is spoken”."],
+["“He gave me a useful book.” → The passive form is:",["A useful book gives me.","I was given a useful book.","I am give a useful book.","A book was giving to me."],1,"With two objects, one passive can start with “I”: I was given a useful book."],
+["The active form of “The window was broken by the strong wind” is:",["The strong wind was breaking the window.","The strong wind broke the window.","The strong wind has break the window.","The window broke the strong wind."],1,"Past simple passive “was broken” returns to active past simple “broke”."],
+["“You must finish this work today.” →",["This work must be finished today.","This work must finished today.","This work must is finished today.","This work must been finished today."],0,"Modal passive = modal + be + past participle: “must be finished”."],
+["“They had completed the project before the deadline.” →",["The project had been completed before the deadline.","The project has been completed before the deadline.","The project was complete before the deadline.","The project had completed before the deadline."],0,"Past perfect passive = had been + past participle."],
+["“Someone is repairing the road now.” →",["The road is repaired now.","The road is being repaired now.","The road was being repaired now.","The road has repaired now."],1,"“Now” shows a present continuous action: is being repaired."],
+["Which sentence uses the passive correctly for a general truth?",["Rice is grown in Bangladesh.","Rice is grow in Bangladesh.","Rice are grown in Bangladesh.","Rice is growing by farmers in Bangladesh every year yesterday."],0,"“Is grown” is the correct present simple passive for a general fact."],
+["“The chef tastes the soup.” → Passive:",["The soup is tasted by the chef.","The soup tastes by the chef.","The soup is taste by the chef.","The soup was tasting by the chef."],0,"Present simple: object + is + past participle (tasted)."],
+["“Did the manager invite you?” → Passive:",["Were you invited by the manager?","Was you invited by the manager?","Did you invited by the manager?","Are you invite by the manager?"],0,"Past simple questions in passive begin with Was/Were + subject + past participle."],
+["“The company will launch a new phone next month.” →",["A new phone will be launched next month.","A new phone will launched next month.","A new phone is launch next month.","A new phone will being launched next month."],0,"Will + be + past participle forms the future passive."]
+]},
+{ id:"link", icon:"🔗", title:"Linking Words & Cohesion", cat:"Grammar", level:"Intermediate", questions:[
+["___ the heavy rain, the football match continued.",["Because","Despite","Although","Since"],1,"“Despite” is followed by a noun phrase and shows contrast: despite the rain."],
+["He earns a high salary; ___, he never seems satisfied.",["therefore","however","moreover","similarly"],1,"“However” introduces a contrasting idea after a semicolon."],
+["She revised every night for a month; ___, she passed with a high band score.",["in contrast","as a result","on the other hand","nevertheless"],1,"“As a result” shows the consequence of her hard work."],
+["___ he was exhausted, he kept practising his essay.",["Despite","Because","Although","Due to"],2,"“Although” is followed by a full clause (subject + verb): although he was exhausted."],
+["I stayed at home all day ___ I was feeling unwell.",["although","despite","because","however"],2,"“Because” gives the reason for staying at home."],
+["___ the storm, all flights were cancelled.",["Because of","Because","Although","Despite of"],0,"Before a noun phrase we use “because of”, not “because” (which needs a clause)."],
+["She speaks English ___ a little French.",["as well as","because of","instead of","in spite of"],0,"“As well as” adds another item to the list."],
+["___ the high price, very few people bought the car.",["Although","Due to","Because","So that"],1,"“Due to + noun phrase” gives a reason: due to the high price."],
+["First, mix the flour and sugar. ___, add the eggs slowly.",["Finally","Then","However","Otherwise"],1,"“Then” shows the next step in a sequence of instructions."],
+["He is ___ talented ___ hardworking, so success came naturally.",["both … and","either … nor","such … that","so … as"],0,"“Both … and” joins two equal qualities of the same subject."],
+["___ , let me summarise the main points of this essay.",["In conclusion","For instance","On the contrary","As a result of"],0,"“In conclusion” signals that the writer is about to summarise and finish."],
+["He ran as fast as he could; ___, he still missed the bus.",["yet","so","because","thus"],0,"“Yet” adds a surprising contrast: he ran fast, yet he missed it."],
+["What is the function of “moreover” in an essay?",["To give an example","To add another supporting point","To show a contrast","To state the conclusion"],1,"“Moreover” adds extra supporting information to the previous point."],
+["___ the fact that the ticket was expensive, she decided to travel by train.",["Despite","Although","Because","Since"],0,"“Despite the fact that + clause” expresses contrast, like “although”."],
+["Online classes are flexible. ___, they require strong self-discipline.",["Similarly","On the other hand","For example","In addition to"],1,"“On the other hand” introduces the contrasting side of an argument."]
+]}
+);
+QUIZZES.push(
+{ id:"modal", icon:"🎚️", title:"Modals, Hedging & Academic Tone", cat:"Grammar", level:"Advanced", questions:[
+["In academic writing, which sentence is suitably hedged?",["The treatment cures all patients.","The treatment may help some patients.","The treatment definitely works for everyone.","The treatment is the only solution."],1,"“May” softens the claim, which is the cautious style academic writing prefers."],
+["Researchers ___ have overlooked this factor in earlier studies, which would explain the conflicting results.",["may","must to","can to","should to"],0,"“May have overlooked” expresses a past possibility without certainty — a classic hedging use of a modal perfect."],
+["It is ___ that regular exercise improves memory.",["likely","surely absolute","certain fact","must"],0,"“It is likely that…” is a classic hedging structure for probable claims."],
+["Which phrase hedges a claim most strongly (makes it most tentative)?",["It proves that…","It could possibly be argued that…","Clearly,…","Without doubt,…"],1,"“Could possibly be argued” is deliberately tentative — the hallmark of hedging."],
+["Students ___ submit the application before the deadline.",["must","might not","could perhaps","may or may not"],0,"“Must” expresses a strong obligation or requirement."],
+["___ I use your dictionary for a moment?",["Must","May","Would have","Did"],1,"“May I…?” is the polite way to ask for permission."],
+["The samples ___ have been contaminated during transport.",["might","must to","can to","ought"],0,"“Might have been” expresses a past possibility without certainty."],
+["Which sentence sounds most formal and academic?",["Loads of people reckon the plan is great.","A considerable number of people support the proposal.","Tons of folks are into it.","Everyone's super happy about the plan."],1,"“A considerable number” and “support the proposal” use formal academic vocabulary."],
+["The report concludes that the policy was effective ___ some extent.",["at","to","in","for"],1,"The fixed hedging phrase is “to some extent”."],
+["You ___ try the past papers before the real exam; they really help.",["should","mustn't","can't","won't"],0,"“Should” gives friendly advice or a recommendation."],
+["He is absent today. He ___ have forgotten about the class.",["must","can","will to","shall to"],0,"“Must have forgotten” is a logical deduction about the past."],
+["Which verb is a typical hedging (tentative) verb?",["prove","tend","destroy","shout"],1,"“Tend to” softens generalisations: “People tend to…” instead of an absolute claim."],
+["The evidence strongly ___ that sleep affects learning.",["demonstrates","demonstrate","demonstrating","demonstrated yesterday ago"],0,"The singular subject “evidence” takes “demonstrates” in the present simple."],
+["Choose the most academic way to say “a lot of research”:",["tons of research","a great deal of research","heaps of research","research galore"],1,"“A great deal of” is the formal quantifier suitable for academic writing."],
+["Writers hedge because academic claims should be ___.",["absolute and exaggerated","cautious and balanced","informal and chatty","emotional and personal"],1,"Hedging keeps claims cautious and balanced, matching the strength of the evidence."]
+]},
+{ id:"gerund", icon:"🔁", title:"Gerunds & Infinitives", cat:"Grammar", level:"Advanced", questions:[
+["I really enjoy ___ novels in my free time.",["to read","reading","read","reads"],1,"“Enjoy” is always followed by a gerund (verb-ing), never by “to + verb”."],
+["She decided ___ the earlier train to avoid the rush.",["catching","catch","to catch","caught"],2,"“Decide” is followed by the to-infinitive: decided to catch."],
+["He avoided ___ the question directly.",["to answer","answering","answer","answered"],1,"“Avoid” takes a gerund: avoided answering."],
+["They hope ___ the scholarship this year.",["winning","to win","win","won"],1,"“Hope” is followed by the to-infinitive: hope to win."],
+["I am looking forward to ___ from the university.",["hear","hearing","heard","hears"],1,"In “look forward to”, “to” is a preposition, so the verb takes -ing: hearing."],
+["The teacher made the students ___ the exercise again.",["to rewrite","rewriting","rewrite","rewrote"],2,"“Make + object” takes the bare infinitive (without to): made them rewrite."],
+["It is no use ___ over a small mistake.",["to worry","worrying","worry","worried"],1,"The pattern “It is no use” is followed by a gerund: no use worrying."],
+["She is interested in ___ more about climate science.",["to learn","learn","learning","learned"],2,"Prepositions like “in” are followed by gerunds: interested in learning."],
+["Would you mind ___ the window? It is quite warm here.",["to open","open","opening","opened"],2,"“Would you mind” is followed by a gerund: mind opening."],
+["He let his younger brother ___ his bicycle.",["to use","using","use","used"],2,"“Let + object” takes the bare infinitive: let him use."],
+["After months of practice, she stopped ___ nervous before tests. (she no longer feels it)",["to feel","feeling","feel","felt"],1,"“Stop + -ing” means to quit an activity or state: stopped feeling nervous."],
+["Please remember ___ the door when you leave.",["locking","to lock","lock","locked"],1,"“Remember + to-infinitive” means remembering a future duty: remember to lock."],
+["The guide suggested ___ the museum in the morning.",["to visit","visiting","visit","visited"],1,"“Suggest” is followed by a gerund: suggested visiting."],
+["This grammar book is really worth ___.",["to read","reading","read","reads"],1,"“Worth” is followed by a gerund: worth reading."],
+["He pretended ___ asleep when his mother entered.",["being","be","to be","been"],2,"“Pretend” takes the to-infinitive: pretended to be asleep."]
+]},
+{ id:"reported", icon:"💬", title:"Reported Speech & Relative Clauses", cat:"Grammar", level:"Advanced", questions:[
+["“I am busy now,” he said. → He said that ___.",["he is busy then","he was busy then","I am busy now","he had busy then"],1,"In reported speech, “am” becomes “was” and “now” becomes “then”."],
+["“Did you enjoy the film?” she asked. → She asked ___.",["did I enjoy the film","if I had enjoyed the film","that I enjoyed the film","whether I enjoy the film yesterday"],1,"Yes/no questions are reported with if/whether, and the tense moves back: had enjoyed."],
+["The man ___ lives next door is a retired professor.",["which","who","whose","whom"],1,"For a person as the subject of the clause, use “who”."],
+["The novel ___ I bought yesterday is already a bestseller.",["who","which","whose","where"],1,"For things, use “which” (or “that”) as the relative pronoun."],
+["“Open the window, please,” she said. → She asked me ___.",["open the window","to open the window","opened the window","that I open window"],1,"Requests are reported with ask + object + to-infinitive."],
+["“I will visit you tomorrow,” he said. → He said he ___ the next day.",["will visit me","would visit me","visits me","visited me yesterday"],1,"“Will” becomes “would”, and “tomorrow” becomes “the next day”."],
+["The girl ___ school bag was stolen reported it to the office.",["who","which","whose","whom"],2,"“Whose” shows possession: the girl whose bag was stolen."],
+["“Where do you live?” he asked. → He asked me ___.",["where do I live","where I lived","that where I live","where did I live"],1,"Reported questions use statement word order (subject + verb): where I lived."],
+["“Don't touch the exhibits!” the guard said. → The guard warned us ___.",["to not touch the exhibits","not to touch the exhibits","don't touch the exhibits","that not touch the exhibits"],1,"Negative commands are reported as “not to + verb”."],
+["My grandfather, ___ is eighty years old, still rides a bicycle.",["which","who","that","whose"],1,"In a non-defining clause about a person, use “who” between commas — “that” is not used here."],
+["“Can you help me with this box?” she asked. → She asked ___.",["can I help her","if I could help her","that I can help her","could I help her"],1,"“Can” becomes “could” in reported speech, and the question uses “if”."],
+["The city ___ we first met has changed a lot.",["which","where","who","whose"],1,"“Where” replaces “in which” for places: the city where we met."],
+["“I have finished my essay,” she said. → She said that ___.",["she has finished her essay","she had finished her essay","I have finished my essay","she finishes her essay"],1,"Present perfect “have finished” becomes past perfect “had finished” in reported speech."],
+["The reason ___ he left early remains unclear.",["which","why","who","whose"],1,"After “the reason”, the relative adverb is “why”."],
+["Choose the correct sentence:",["The book, that I lent you, is mine.","The book that I lent you is mine.","The book what I lent you is mine.","The book, what I lent you, is mine."],1,"A defining relative clause uses “that/which” without commas; “what” cannot be a relative pronoun here."]
+]},
+{ id:"wordform", icon:"🔤", title:"Word Formation", cat:"Vocabulary", level:"Advanced", questions:[
+["The noun form of “happy” is ___.",["happily","happiness","happier","happify"],1,"Adding the suffix -ness to an adjective forms a noun: happiness."],
+["After a long discussion, they finally reached a ___.",["decide","decisive","decision","decidedly"],2,"The noun form of “decide” is “decision” — note the spelling change from d to s."],
+["The ___ of the new bridge took almost two years.",["construct","construction","constructive","constructed"],1,"The subject of the sentence needs a noun: construction."],
+["The noun form of “responsible” is ___.",["responsibly","responsibility","responsive","respond"],1,"“Responsibility” is the noun; -ity replaces -le."],
+["It was a deeply ___ performance by the young singer.",["impress","impression","impressive","impressively"],2,"Before a noun we need the adjective “impressive”."],
+["A person who works for a company is an ___.",["employer","employee","employment","employ"],1,"An “employee” works for an employer; the suffix -ee marks the receiver of the action."],
+["Her quiet ___ surprised everyone who knew the problem.",["generous","generosity","generously","generate"],1,"After the possessive “her”, a noun is needed: generosity."],
+["The adjective form of “science” is ___.",["scientist","scientifically","scientific","scienceful"],2,"“Scientific” is the adjective; “scientist” is a person noun."],
+["Swimming in that river can be ___.",["danger","dangerous","dangerously","endanger"],1,"After “can be” we need an adjective: dangerous."],
+["The ___ of the lake in this area is still unknown.",["deep","depth","deeply","deepen"],1,"The noun form of “deep” is “depth”, like wide → width and long → length."],
+["He answered all the questions ___ and clearly. (adverb form of “confident”)",["confident","confidence","confidently","confidential"],2,"To describe how he answered, we need the adverb “confidently”."],
+["Regular exercise improves both strength and ___ health. (adjective form of “mind”)",["mental","mentally","mentality","minded"],0,"The adjective form of “mind” is “mental”: mental health."],
+{t:1,q:"Type the correct form of the word in brackets: “The new online system will ___ (ABLE) citizens to renew licences from home.”",a:["enable"],e:"“Enable” is the verb formed from “able” with the prefix en-: it means to make someone able to do something."},
+{t:1,q:"Type the correct form of the word in brackets: “His ___ (PATIENT) helped him wait calmly for the results.”",a:["patience"],e:"The noun form of “patient” (the adjective) is “patience”."},
+{t:1,q:"Type the correct form of the word in brackets: “She completed the calculations ___ (ACCURATE), without a single error.”",a:["accurately"],e:"The verb “completed” needs an adverb: accurately."}
+]}
+);
+QUIZZES.push(
+{ id:"colloc", icon:"🧲", title:"Collocations (make / do / take)", cat:"Vocabulary", level:"Intermediate", questions:[
+["After weeks of discussion, the committee finally ___ a decision.",["did","made","took","caught"],1,"We “make a decision”, not “do a decision”."],
+["Don't forget to ___ your homework before dinner.",["make","do","take","have got"],1,"“Do homework” is the fixed collocation."],
+["Let's ___ a short break and continue in ten minutes.",["make","do","take","give"],2,"“Take a break” is the natural collocation."],
+["There was ___ rain throughout the night, and the streets flooded.",["strong","heavy","big","tall"],1,"Rain collocates with “heavy”, not “strong”."],
+["I prefer ___ coffee without sugar in the morning.",["heavy","strong","hard","thick"],1,"Coffee and tea take “strong” to describe a concentrated taste."],
+["With daily practice, she is ___ good progress in speaking.",["doing","making","taking","getting up"],1,"The fixed phrase is “make progress”."],
+["Could you ___ me a favour and check this essay?",["make","do","take","give off"],1,"We “do someone a favour”."],
+["Every team member must ___ responsibility for their own tasks.",["make","do","take","catch"],2,"“Take responsibility” is the standard collocation."],
+["He stayed home because he had ___ a bad cold.",["made","caught","done","taken part"],1,"Illnesses like colds are “caught”: catch a cold."],
+["Please ___ attention to the safety instructions.",["give mind","pay","make","take care"],1,"The fixed phrase is “pay attention to”."],
+["She ___ a real effort to arrive on time every day.",["did","made","took","caught"],1,"We “make an effort”, not “do an effort”."],
+["The students are ___ research on air pollution in Dhaka.",["making","doing","taking","having"],1,"“Do research” is the correct collocation (research is uncountable)."],
+["The graduation ceremony will ___ place in the main auditorium.",["make","do","take","hold on"],2,"Events “take place” — this means “happen” in formal English."],
+["___ winds damaged several roofs during the storm.",["Heavy","Strong","Hard","Deep"],1,"Wind collocates with “strong”: strong winds."],
+["Everyone ___ mistakes when learning a new language.",["does","makes","takes","catches"],1,"The fixed phrase is “make a mistake”."]
+]},
+{ id:"phrasal", icon:"🚀", title:"Phrasal Verbs", cat:"Vocabulary", level:"Intermediate", questions:[
+["After months of trying, he finally gave up smoking. “Give up” means ___.",["to start something new","to stop doing something","to search for something","to tolerate something"],1,"“Give up” means to stop doing something, often a habit."],
+["The police are looking into the matter. “Look into” means ___.",["to admire","to investigate","to ignore","to wait for"],1,"“Look into” means to examine or investigate something."],
+["The meeting was put off until Friday. “Put off” means ___.",["to cancel forever","to postpone","to organise","to attend"],1,"“Put off” means to delay something to a later time."],
+["We have run out of printing paper. “Run out of” means ___.",["to exercise outside","to have none left","to escape from","to produce more"],1,"If you run out of something, your supply is finished."],
+["She brought up an interesting point during the discussion. “Bring up” means ___.",["to vomit","to raise a topic","to carry upstairs","to educate a child only"],1,"“Bring up” can mean to introduce a topic for discussion."],
+["Rafi really takes after his grandfather. “Take after” means ___.",["to follow behind","to resemble","to remove clothing","to pursue"],1,"“Take after” means to look or behave like an older relative."],
+["It took her months to get over the illness. “Get over” means ___.",["to climb","to recover from","to receive","to understand"],1,"“Get over” means to recover from an illness or a shock."],
+["Our car broke down on the highway. “Break down” means ___.",["to cry loudly","to stop working","to divide into parts","to enter by force"],1,"Machines “break down” when they stop working."],
+["I came across an old photo while cleaning. “Come across” means ___.",["to meet by chance / find unexpectedly","to cross a road","to argue with","to visit formally"],0,"“Come across” means to find something by chance."],
+["I am looking forward to the holidays. “Look forward to” means ___.",["to search behind","to feel pleased about a future event","to remember the past","to avoid something"],1,"“Look forward to” means to anticipate something with pleasure."],
+["The manager turned down our proposal. “Turn down” means ___.",["to lower the volume only","to refuse or reject","to rotate","to accept happily"],1,"“Turn down” means to reject an offer, request or proposal."],
+["Scientists carried out a series of experiments. “Carry out” means ___.",["to transport outside","to perform or conduct","to lift with hands","to continue forever"],1,"“Carry out” means to perform a task, experiment or duty."],
+["They set up a small library in the village. “Set up” means ___.",["to establish or start","to place on a shelf","to deceive","to postpone"],0,"“Set up” means to establish or arrange something new."],
+["I only found out the truth yesterday. “Find out” means ___.",["to lose something","to discover information","to search physically","to invent a story"],1,"“Find out” means to discover or learn something."],
+["Please go on with your story. “Go on” means ___.",["to leave","to continue","to happen only in the past","to switch off"],1,"“Go on” means to continue doing something."]
+]},
+{ id:"acad", icon:"🎓", title:"Academic Vocabulary & Synonyms", cat:"Vocabulary", level:"Advanced", questions:[
+["Choose the closest synonym of “significant” in academic writing:",["tiny","considerable","silent","ancient"],1,"A “significant” result is important or considerable in size or effect."],
+["“Approximately” is closest in meaning to ___.",["exactly","roughly","rarely","suddenly"],1,"“Approximately” means roughly — not exact, but close."],
+["The study “demonstrates” a clear link. “Demonstrates” here means ___.",["hides","shows","guesses","destroys"],1,"In academic texts, “demonstrate” means to show or prove clearly."],
+["The formal academic word for “get” (receive) is ___.",["grab","obtain","snatch","fetch"],1,"“Obtain” is the formal equivalent of “get/receive”."],
+["“Sufficient” means the same as ___.",["extra","enough","scarce","rapid"],1,"Sufficient = enough to meet a need."],
+["“Prior to” the exam, students revised. “Prior to” means ___.",["after","during","before","despite"],2,"“Prior to” is the formal way to say “before”."],
+["“Consequently” is used to introduce ___.",["an example","a result","a contrast","a definition"],1,"“Consequently” means “as a result”."],
+["“Numerous” students applied. “Numerous” means ___.",["very few","many","exactly ten","no"],1,"Numerous = many in number."],
+["The formal synonym of “help” (verb) is ___.",["assist","harm","watch","lend"],0,"“Assist” is the formal academic form of “help”."],
+["“Decline” in “a decline in sales” means ___.",["an increase","a decrease","a pause","a guess"],1,"A decline is a fall or decrease in amount."],
+["To “retain” information means to ___.",["forget it","keep it","sell it","avoid it"],1,"“Retain” means to keep or hold on to something."],
+["They “established” a research centre in 2010 — that is, they ___.",["closed it","set it up","visited it","painted it"],1,"“Establish” means to found or set up an organisation."],
+["The results “indicate” a problem. “Indicate” is closest to ___.",["solve","suggest","remove","celebrate"],1,"“Indicate” means to point to or suggest something."],
+["The formal word for “buy” is ___.",["purchase","bargain","shop","steal"],0,"“Purchase” is the formal equivalent of “buy”."],
+["A “component” of a system is ___.",["its owner","a part of it","its price","its colour"],1,"A component is one part that makes up a larger whole."]
+]},
+{ id:"writing", icon:"✍️", title:"Writing Task 1 & Task 2 Grammar", cat:"Writing", level:"IELTS Application", questions:[
+["Complete the Task 1 sentence: “The number of cars rose ___ 2010 ___ 2020.”",["from … to","between … to","since … until","at … at"],0,"A period with two endpoints uses “from … to …”."],
+["Which adverb best completes: “Sales increased ___ after the new model was released.”",["dramatically","dramatic","more dramatic","dramatics"],0,"The verb “increased” needs an adverb of degree: dramatically."],
+["Choose the most accurate Task 1 phrase:",["Just over 40% of students passed.","Some students passed aroundly.","The passing students were 40 percents.","Almostly 40% students passed."],0,"“Just over 40%” is the precise, natural way to describe a figure slightly above 40."],
+["Which is the best formal opening for a Task 2 discussion essay?",["Nowadays, loads of people chat about this topic.","In recent years, there has been a growing debate about this issue.","Hey everyone, let's talk about this.","This essay is gonna discuss stuff."],1,"Formal Task 2 openings avoid slang; “there has been a growing debate” is academic and natural."],
+["Which sentence is grammatically correct for Task 1?",["The chart shows how electricity use changed over 20 years.","The chart describe how electricity use changed.","The chart showing how electricity use changes yesterday.","The chart is show the changes of electricity."],0,"“The chart shows…” uses the correct singular verb and tense for describing a chart."],
+["Complete: “Males accounted ___ 60% of the total workforce.”",["for","of","to","with"],0,"The pattern is “account for + percentage”."],
+["Complete the comparison: “House prices in Dhaka are higher ___ in Khulna.”",["then","than","that","to"],1,"Comparative adjectives are followed by “than”."],
+["Which sentence uses “whereas” correctly?",["Whereas the north is industrial, the south depends mainly on farming.","Whereas the north is industrial, but the south farms.","The north whereas is industrial.","Whereas, the south is farming area."],0,"“Whereas” joins two contrasting clauses without “but”."],
+["Complete the past trend: “Between 2000 and 2010, the figure ___ steadily.”",["rises","rose","is rising now","will rise"],1,"A finished past period requires the past simple: rose."],
+["Which phrase would you use to move to a new data group in Task 1?",["By the way…","Turning to the figures for the second group…","Anyway…","Guess what…"],1,"“Turning to…” is a formal signpost for moving between data groups."],
+["A strong Task 1 overview must ___.",["copy every number from the chart","summarise the main trends without details","give the writer's personal opinion","list the units of measurement"],1,"The overview paraphrases the main trends and patterns; details belong in the body paragraphs."],
+["Choose the correct sentence:",["The consumption of rice fell slightly in 2015.","The consumption of rice fell slight in 2015.","The consumption of rice slightly fell in 2015 yesterday.","Rice consumption falled slightly."],0,"“Slightly” is the correct adverb, and “fell” is the past of “fall”."],
+["Which is the best conclusion opener for Task 2?",["In conclusion, it is clear that both views have merit.","To wrap things up lol, that's it.","Finally guys, my essay ends here.","At the end of the day I am done."],0,"“In conclusion, it is clear that…” is formal and signals the final position."],
+["Choose the correct comparison sentence:",["There were twice as many visitors in 2020 as in 2010.","There were twice visitors than in 2010.","Visitors in 2020 were twice as much than 2010.","There were two times many visitors."],0,"The pattern is “twice as many + countable noun + as…”."],
+["Complete: “Throughout the period, the figure fluctuated ___ 20 and 30 units.”",["among","between","from","within of"],1,"Fluctuation between two values uses “between … and …”."]
+]}
+);
+
+/* ================= EXTRA PRACTICE SETS ================= */
+var READING = [
+{ title:"Reading 1 — The Rise of Urban Gardening", tag:"True / False / Not Given",
+  passage:"In many large cities, a quiet change is taking place on rooftops and balconies. Residents are growing vegetables and herbs in small spaces, a practice known as urban gardening. Supporters say it gives city families fresh food and reduces the money spent at markets. Some studies suggest that gardening also lowers stress, because people spend time outdoors caring for plants. However, urban gardens cannot replace farms; the amount of food they produce is still very small compared with a city's total needs.",
+  questions:[
+   ["The passage says urban gardening happens only on rooftops.",1,"FALSE — the passage mentions rooftops AND balconies."],
+   ["According to the passage, urban gardening can save families money.",0,"TRUE — it “reduces the money spent at markets”."],
+   ["Gardening may reduce stress, according to some studies.",0,"TRUE — “Some studies suggest that gardening also lowers stress.”"],
+   ["Urban gardens now produce most of the food that cities need.",1,"FALSE — they produce “very small” amounts compared with total needs."],
+   ["The passage tells us which city started urban gardening first.",2,"NOT GIVEN — no city or origin is mentioned in the passage."]
+  ]},
+{ title:"Reading 2 — Sleep and Student Performance", tag:"True / False / Not Given",
+  passage:"Researchers at a northern university recently studied the sleeping habits of 400 first-year students. They found that students who slept at least seven hours a night scored, on average, 11 percent higher in final examinations than those who slept less than six hours. Interestingly, the time students went to bed mattered less than the total number of hours they slept. The researchers warn, however, that their study shows a link, not proof that sleep directly causes better grades; other habits, such as regular study, may also play a part.",
+  questions:[
+   ["The study involved 400 students.",0,"TRUE — “the sleeping habits of 400 first-year students”."],
+   ["Students who slept under six hours scored higher on average.",1,"FALSE — the longer sleepers scored 11 percent higher."],
+   ["Going to bed early was the most important factor in the study.",1,"FALSE — bedtime “mattered less than the total number of hours”."],
+   ["The researchers claim sleep is proven to cause better grades.",1,"FALSE — they warn the study shows “a link, not proof”."],
+   ["The passage names the university where the study was done.",2,"NOT GIVEN — it only says “a northern university”."]
+  ]}
+];
+var TFNG = ["TRUE","FALSE","NOT GIVEN"];
+
+var LISTENING = [
+{ title:"Listening 1 — At the University Library", sub:"ট্রান্সক্রিপ্টটি পড়ুন, তারপর প্রশ্নগুলোর উত্তর দিন (Listening-style MCQ)",
+  passage:"Librarian: Good morning. How can I help you?\nStudent: Hi. I need to borrow this book on environmental science, but my card seems to be blocked.\nLibrarian: Let me check… Ah, you have an unpaid fine of 150 taka for a book returned late last month.\nStudent: Oh, I see. Can I pay it now?\nLibrarian: Of course. Once the fine is paid, the block is removed immediately. By the way, this book can be borrowed for two weeks, and you can renew it once online.\nStudent: That's fine. Also, where can I find past exam papers?\nLibrarian: They're on the second floor, in the reference section, next to the journals.",
+  questions:[
+   ["Why was the student's card blocked?",["He lost his card.","He had an unpaid fine.","He borrowed too many books.","The library was closed."],1,"The librarian says there is “an unpaid fine of 150 taka” for a late return."],
+   ["How long can the student borrow the book?",["One week","Two weeks","One month","Three days"],1,"“This book can be borrowed for two weeks.”"],
+   ["How many times can the book be renewed?",["Never","Once","Twice","Unlimited"],1,"“You can renew it once online.”"],
+   ["Where are the past exam papers?",["On the first floor","Next to the journals on the second floor","At the front desk","In the computer lab"],1,"They are “on the second floor, in the reference section, next to the journals”."],
+   ["What must the student do before borrowing again?",["Apply for a new card","Pay the fine","Return all his books","Meet the head librarian"],1,"Once the fine is paid, the block is removed immediately."]
+  ]},
+{ title:"Listening 2 — A Talk About a Weekend Workshop", sub:"ট্রান্সক্রিপ্টটি পড়ুন, তারপর প্রশ্নগুলোর উত্তর দিন (Listening-style MCQ)",
+  passage:"Good afternoon, everyone. I'm pleased to announce a two-day photography workshop this weekend at the Community Arts Centre. It will run from 9 in the morning until 4 in the afternoon on both Saturday and Sunday. The workshop is free for students, but places are limited to twenty, so please register at the front office by Thursday evening. Participants should bring their own camera if they have one; a few cameras will be available to borrow. On Sunday afternoon, there will be a small exhibition of the best photographs taken during the workshop, and the winner will receive a book voucher.",
+  questions:[
+   ["How long does the workshop last?",["One day","Two days","Three days","A whole week"],1,"It is a “two-day workshop” on Saturday and Sunday."],
+   ["What time does it finish each day?",["At 2 pm","At 3 pm","At 4 pm","At 5 pm"],2,"It runs “until 4 in the afternoon”."],
+   ["How much does the workshop cost for students?",["500 taka","It is free","200 taka","A book voucher"],1,"“The workshop is free for students.”"],
+   ["By when must participants register?",["Friday morning","Thursday evening","Saturday morning","Sunday afternoon"],1,"“Register at the front office by Thursday evening.”"],
+   ["What will the winner of the exhibition receive?",["A new camera","A certificate only","A book voucher","Free membership"],2,"“The winner will receive a book voucher.”"]
+  ]}
+];
+
+var SPEAKING = {
+ 1:["Where is your hometown, and what do you like most about it?","What subject are you studying, and why did you choose it?","What do you usually do in your free time?","Do you prefer eating at home or in restaurants? Why?","What kind of weather do you enjoy the most?","How often do you listen to music, and what kind do you like?","Do you enjoy reading books? What was the last book you read?","Have you travelled to many places in your country?","How do you usually spend time with your friends?","Do you think technology has made life easier? How?","Do you play or watch any sports?","What type of films do you like watching?","Can you describe your typical daily routine?","Do you like taking photographs? Why or why not?","Would you like to live in a big city or a small town in the future?"],
+ 2:[["Describe a book you have read that you enjoyed.","You should say: what the book was, when you read it, what it was about, and explain why you enjoyed it."],
+     ["Describe a place you would like to visit.","You should say: where it is, how you learned about it, what you would do there, and explain why you want to go."],
+     ["Describe a person who has influenced you.","You should say: who the person is, how you know them, what they did, and explain how they influenced you."],
+     ["Describe a gift you received that was special.","You should say: what it was, who gave it to you, when you received it, and explain why it was special."],
+     ["Describe a skill you would like to learn.","You should say: what the skill is, why you want to learn it, how you would learn it, and explain how it would help you."],
+     ["Describe a journey you remember well.","You should say: where you went, who you went with, what happened, and explain why you remember it."],
+     ["Describe a festival or celebration in your country.","You should say: what it is, when it takes place, what people do, and explain why it is important."],
+     ["Describe a piece of technology you use often.","You should say: what it is, how often you use it, what you use it for, and explain how it helps you."],
+     ["Describe a memorable meal you have had.","You should say: what the food was, where you ate it, who you were with, and explain why it was memorable."],
+     ["Describe a building you find interesting.","You should say: where it is, what it looks like, what it is used for, and explain why you find it interesting."]],
+ 3:["How has education changed in your country in the last twenty years?","What can governments do to protect the environment in big cities?","Do you think technology will replace teachers in the future? Why or why not?","What are the advantages and disadvantages of working from home?","How can small towns keep young people from moving to big cities?"]
+};
+
+var FLASHCARDS = [
+["make a decision","সিদ্ধান্ত নেওয়া — to decide something","After long discussion, the board made a decision."],
+["do homework","বাড়ির কাজ করা — schoolwork done at home","He does his homework right after dinner."],
+["take a break","বিরতি নেওয়া — to rest for a short time","Let's take a break and have some tea."],
+["heavy rain","প্রবল বৃষ্টি — a lot of rain","Heavy rain flooded the streets last night."],
+["strong coffee","কড়া কফি — coffee with a strong taste","She drinks strong coffee every morning."],
+["make progress","উন্নতি করা — to improve","You are making great progress in English."],
+["do a favour","উপকার করা — to help someone","Could you do me a favour and open the window?"],
+["take responsibility","দায়িত্ব নেওয়া — to accept duty for something","A leader must take responsibility for mistakes."],
+["pay attention","মনোযোগ দেওয়া — to listen or watch carefully","Please pay attention to the instructions."],
+["make a mistake","ভুল করা — to do something wrong","Everyone makes mistakes while learning."],
+["give up","হাল ছেড়ে দেওয়া — to stop trying","Never give up on your dreams."],
+["look into","তদন্ত করা — to investigate","The police are looking into the case."],
+["put off","স্থগিত করা — to postpone","The match was put off because of rain."],
+["run out of","ফুরিয়ে যাওয়া — to have none left","We have run out of milk."],
+["bring up","আলোচনায় তোলা — to raise a topic","She brought up the issue at the meeting."],
+["take after","কারো মতো হওয়া — to resemble a relative","He takes after his father."],
+["get over","সেরে ওঠা — to recover from illness or shock","It took weeks to get over the flu."],
+["break down","নষ্ট হয়ে যাওয়া — to stop working","The bus broke down on the way."],
+["come across","হঠাৎ খুঁজে পাওয়া — to find by chance","I came across an old diary in the drawer."],
+["look forward to","আগ্রহে অপেক্ষা করা — to anticipate with pleasure","I look forward to meeting you."],
+["carry out","সম্পন্ন করা — to perform a task","The team carried out the survey in May."],
+["set up","প্রতিষ্ঠা করা — to establish","They set up a charity school in 2015."],
+["find out","জানতে পারা — to discover","I found out the exam date yesterday."],
+["turn down","প্রত্যাখ্যান করা — to refuse an offer","He turned down the job offer."],
+["significant","গুরুত্বপূর্ণ — important or considerable","There was a significant rise in prices."],
+["approximately","প্রায় — roughly, not exactly","The journey takes approximately three hours."],
+["obtain","অর্জন করা / পাওয়া — to get (formal)","You can obtain the form from the office."],
+["sufficient","যথেষ্ট — enough","We have sufficient food for everyone."],
+["consequently","ফলে — as a result","He missed the bus; consequently, he was late."],
+["numerous","অসংখ্য — many","Numerous students joined the club."]
+];
+
+/* =====================================================================
+   APP LOGIC
+===================================================================== */
+var LS_KEY = "iqa_state_v1";
+var $ = function(s){ return document.querySelector(s); };
+var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function todayStr(){ var d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function shuffleArr(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+function mulberry32(seed){ return function(){ seed|=0; seed=seed+0x6D2B79F5|0; var t=Math.imul(seed^seed>>>15,1|seed); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function seedShuffle(a, rand){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(rand()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
+
+function freshState(){ return { xp:0, answered:0, correct:0, best:{}, mistakes:{}, cleared:0, badges:[], streakCount:0, lastDay:"", lastAnswerDay:"", dailyDay:"", completed:[], spRate:{}, resume:null }; }
+var S = (function(){ try{ var raw=localStorage.getItem(LS_KEY); if(raw){ var p=JSON.parse(raw); var f=freshState(); for(var k in f){ if(p[k]===undefined) p[k]=f[k]; } return p; } }catch(e){} return freshState(); })();
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} }
+
+/* day streak — counts only days on which at least one question was answered */
+function yesterdayStr(){ var y=new Date(); y.setDate(y.getDate()-1); return y.getFullYear()+"-"+String(y.getMonth()+1).padStart(2,"0")+"-"+String(y.getDate()).padStart(2,"0"); }
+function displayStreak(){ if(!S.lastAnswerDay) return 0; if(S.lastAnswerDay===todayStr() || S.lastAnswerDay===yesterdayStr()) return S.streakCount||0; return 0; }
+function touchStreak(){ var t=todayStr(); if(S.lastAnswerDay!==t){ S.streakCount = (S.lastAnswerDay===yesterdayStr()) ? (S.streakCount||0)+1 : 1; S.lastAnswerDay=t; } }
+
+var LEVELS=[{xp:0,name:"Beginner"},{xp:100,name:"Explorer"},{xp:300,name:"Achiever"},{xp:600,name:"Champion"},{xp:1000,name:"Band 8 Ready"}];
+function levelOf(xp){ var cur=LEVELS[0], next=null; for(var i=0;i<LEVELS.length;i++){ if(xp>=LEVELS[i].xp){ cur=LEVELS[i]; next=LEVELS[i+1]||null; } } return {cur:cur,next:next}; }
+function bandOf(pct){ if(pct>=90) return "Band 8.0"; if(pct>=80) return "Band 7.5"; if(pct>=70) return "Band 7.0"; if(pct>=60) return "Band 6.5"; if(pct>=50) return "Band 6.0"; return "Band 5.5"; }
+function quizById(id){ for(var i=0;i<QUIZZES.length;i++) if(QUIZZES[i].id===id) return QUIZZES[i]; return null; }
+
+var BADGES=[
+ {id:"first",em:"🎉",name:"First Quiz",desc:"প্রথম কুইজ শেষ করুন"},
+ {id:"perfect",em:"💯",name:"Perfect Score",desc:"একটি কুইজে 100% স্কোর"},
+ {id:"xp100",em:"⭐",name:"100 XP",desc:"মোট 100 XP অর্জন"},
+ {id:"xp500",em:"🌟",name:"500 XP",desc:"মোট 500 XP অর্জন"},
+ {id:"streak7",em:"🔥",name:"7-Day Streak",desc:"টানা 7 দিন প্র্যাক্টিস"},
+ {id:"slayer",em:"🧹",name:"Mistake Slayer",desc:"10টি ভুল শুধরে ফেলা"},
+ {id:"speed",em:"⚡",name:"Speedster",desc:"এক Blitz-এ 10+ সঠিক"},
+ {id:"book",em:"📚",name:"Bookworm",desc:"সব 16টি কুইজ শেষ"},
+ {id:"daily",em:"📅",name:"Daily Challenger",desc:"Daily Challenge সম্পন্ন"}
+];
+function toast(msg){ var t=$("#toast"); t.textContent=msg; t.classList.add("on"); clearTimeout(t._h); t._h=setTimeout(function(){ t.classList.remove("on"); },3400); }
+function unlockBadge(id){ if(S.badges.indexOf(id)>=0) return; S.badges.push(id); var b=null; BADGES.forEach(function(x){ if(x.id===id) b=x; }); if(b) toast("🏆 নতুন ব্যাজ আনলক: "+b.em+" "+b.name+"!"); save(); }
+function checkBadges(ctx){
+ if(S.completed.length>0) unlockBadge("first");
+ if(ctx && ctx.pct===100 && ctx.total>=10) unlockBadge("perfect");
+ if(S.xp>=100) unlockBadge("xp100");
+ if(S.xp>=500) unlockBadge("xp500");
+ if(displayStreak()>=7) unlockBadge("streak7");
+ if(S.cleared>=10) unlockBadge("slayer");
+ if(ctx && ctx.blitzBest>=10) unlockBadge("speed");
+ if(S.completed.length>=16) unlockBadge("book");
+ if(ctx && ctx.daily) unlockBadge("daily");
+}
+
+/* ---------- views ---------- */
+function showView(name){
+ $$(".view").forEach(function(v){ v.classList.remove("on"); });
+ var el=document.getElementById("view-"+name); if(el) el.classList.add("on");
+ window.scrollTo(0,0);
+ if(name==="home") renderHome();
+}
+$$("[data-go]").forEach(function(b){ b.addEventListener("click", function(){ stopAllTimers(); showView(b.getAttribute("data-go")); }); });
+
+/* ---------- confirm modal ---------- */
+var confirmCb=null;
+function askConfirm(title, text, cb){ $("#confirm-title").textContent=title; $("#confirm-text").textContent=text; confirmCb=cb; $("#modal-confirm").classList.add("on"); }
+$("#btn-confirm-yes").addEventListener("click", function(){ $("#modal-confirm").classList.remove("on"); if(confirmCb){ var cb=confirmCb; confirmCb=null; cb(); } });
+$$("[data-close]").forEach(function(b){ b.addEventListener("click", function(){ document.getElementById(b.getAttribute("data-close")).classList.remove("on"); }); });
+$("#btn-github").addEventListener("click", function(){ $("#modal-github").classList.add("on"); });
+
+/* ---------- home render ---------- */
+var CAT_CHIPS=["All","Grammar","Vocabulary","Writing","Reading","Listening","Speaking"];
+var LVL_CHIPS=["All","Foundation","Intermediate","Advanced","IELTS Application"];
+var curCat="All", curLvl="All", curSearch="";
+function mistakeCount(){ return Object.keys(S.mistakes).length; }
+
+function renderHome(){
+ var acc = S.answered>0 ? Math.round(S.correct/S.answered*100) : null;
+ $("#hs-xp").textContent=S.xp; $("#hs-streak").textContent=displayStreak();
+ $("#hs-acc").textContent= acc===null ? "—" : acc+"%";
+ var lv=levelOf(S.xp);
+ var pctNext = lv.next ? Math.min(100, Math.round((S.xp-lv.cur.xp)/(lv.next.xp-lv.cur.xp)*100)) : 100;
+ $("#dash").innerHTML =
+  '<div class="dcard"><div class="big">⭐ '+S.xp+' XP</div><div class="lbl">লেভেল: <b style="color:var(--teal)">'+lv.cur.name+'</b>'+(lv.next?' • পরের লেভেল '+lv.next.name+'-এ আরও '+(lv.next.xp-S.xp)+' XP':' • সর্বোচ্চ লেভেল! 🎉')+'</div><div class="xpbar"><i style="width:'+pctNext+'%"></i></div></div>'
+  +'<div class="dcard"><div class="big">🔥 '+displayStreak()+'</div><div class="lbl">দিনের স্ট্রিক — যেদিন উত্তর দেবেন, সেদিনই গণনা হবে</div></div>'
+  +'<div class="dcard"><div class="big">🎯 '+(acc===null?"—":acc+"%")+'</div><div class="lbl">Accuracy (সঠিক উত্তরের হার)</div></div>'
+  +'<div class="dcard"><div class="big">✅ '+S.answered+'</div><div class="lbl">প্রশ্নের উত্তর দেওয়া হয়েছে</div></div>'
+  +'<div class="dcard"><div class="big">🏆 '+S.badges.length+' / '+BADGES.length+'</div><div class="lbl">ব্যাজ অর্জন করেছেন</div></div>';
+
+ var dailyDone = S.dailyDay===todayStr();
+ var specials=[
+  {key:"daily", em:"📅", title:"Daily Challenge", cat:"Grammar", meta:"আজকের তারিখ অনুযায়ী নির্ধারিত 10টি প্রশ্ন — সবার জন্য একই সেট", go:dailyDone?"✓ আজ সম্পন্ন — কাল আবার নতুন সেট":"আজকের চ্যালেঞ্জ শুরু করুন →"},
+  {key:"mock", em:"🎲", title:"Mixed Mock Test", cat:"Grammar", meta:"সব কুইজ থেকে এলোমেলো 20টি প্রশ্ন • শেষে আনুমানিক Band স্কোর", go:"মক টেস্ট দিন →"},
+  {key:"blitz", em:"⚡", title:"Speed Blitz", cat:"Grammar", meta:"60 সেকেন্ডে যত বেশি সম্ভব সঠিক উত্তর • Combo x2 বোনাস", go:"Blitz খেলুন →"},
+  {key:"flash", em:"🃏", title:"Flashcards", cat:"Vocabulary", meta:"30টি Vocabulary কার্ড — ট্যাপ করে অর্থ ও উদাহরণ দেখুন", go:"কার্ড প্র্যাক্টিস করুন →"},
+  {key:"mistakes", em:"❤️‍🩹", title:"My Mistakes", cat:"Grammar", meta:"জমে থাকা ভুল: "+mistakeCount()+"টি • টানা 2 বার সঠিক হলেই মুছে যাবে", go: mistakeCount()? "ভুলগুলো প্র্যাক্টিস করুন →":"এখন কোনো ভুল জমা নেই 🎉"},
+  {key:"reading", em:"📖", title:"Reading Practice", cat:"Reading", meta:"2টি প্যাসেজ • 10টি True / False / Not Given প্রশ্ন", go:"Reading শুরু করুন →"},
+  {key:"listening", em:"🎧", title:"Listening Practice", cat:"Listening", meta:"2টি ট্রান্সক্রিপ্ট • 10টি MCQ — পড়ে উত্তর দিন", go:"Listening শুরু করুন →"},
+  {key:"speaking", em:"🗣️", title:"Speaking Prompt Bank", cat:"Speaking", meta:"30টি প্রম্পট • Part 1, 2 ও 3 • টাইমার + নিজের রেটিং", go:"Speaking প্র্যাক্টিস করুন →"}
+ ];
+ $("#special-grid").innerHTML = specials.map(function(c){
+   return '<button type="button" class="qcard special" data-special="'+c.key+'" data-cat="'+c.cat+'" data-level="Special" data-search="'+(c.title+" "+c.meta).toLowerCase()+'"><span class="ic">'+c.em+'</span><h3>'+c.title+'</h3><span class="meta">'+c.meta+'</span><span class="go">'+c.go+'</span></button>';
+ }).join("");
+ $$("#special-grid [data-special]").forEach(function(b){ b.addEventListener("click", function(){ openSpecial(b.getAttribute("data-special")); }); });
+
+ $("#quiz-grid").innerHTML = QUIZZES.map(function(q){
+   var best = S.best[q.id] ? '<div class="best">Best: '+S.best[q.id]+' 🏆</div>' : '';
+   var resume = (S.resume && S.resume.quizId===q.id) ? '<div class="best" style="color:var(--teal)">⏩ অসমাপ্ত কুইজ আছে — Resume করা যাবে</div>' : '';
+   return '<button type="button" class="qcard" data-quiz="'+q.id+'" data-cat="'+q.cat+'" data-level="'+q.level+'" data-search="'+(q.title+" "+q.cat+" "+q.level).toLowerCase()+'"><span class="ic">'+q.icon+'</span><h3>'+q.title+'</h3><span class="meta"><span class="tag ct">'+q.cat+'</span><span class="tag lv">'+q.level+'</span><span class="tag">'+q.questions.length+'টি প্রশ্ন</span></span>'+best+resume+'<span class="go">সেটআপ করে শুরু করুন →</span></button>';
+ }).join("");
+ $$("#quiz-grid [data-quiz]").forEach(function(b){ b.addEventListener("click", function(){ openSetup(b.getAttribute("data-quiz")); }); });
+
+ $("#badge-grid").innerHTML = BADGES.map(function(b){
+   var got = S.badges.indexOf(b.id)>=0;
+   return '<div class="badge'+(got?" got":"")+'"><div class="em">'+b.em+'</div><h3>'+b.name+'</h3><p>'+b.desc+(got?" • ✓ অর্জিত":"")+'</p></div>';
+ }).join("");
+ $("#badge-count").textContent = S.badges.length+" / "+BADGES.length+" আনলক হয়েছে";
+ applyFilters();
+}
+
+function applyFilters(){
+ var any=false;
+ $$("#quiz-grid .qcard, #special-grid .qcard").forEach(function(card){
+   var cat=card.getAttribute("data-cat"), lvl=card.getAttribute("data-level"), txt=card.getAttribute("data-search")||"";
+   var ok = (curCat==="All"||cat===curCat) && (curLvl==="All"||lvl===curLvl) && (curSearch===""||txt.indexOf(curSearch)>=0);
+   card.style.display = ok? "" : "none";
+   if(ok) any=true;
+ });
+ var grid=$("#quiz-grid");
+ var note=grid.querySelector(".empty-note");
+ if(note) note.remove();
+ var quizVisible = $$("#quiz-grid .qcard").some(function(c){ return c.style.display!=="none"; });
+ if(!quizVisible){ var d=document.createElement("div"); d.className="empty-note"; d.textContent="😕 এই ফিল্টারে কোনো কুইজ মিলছে না — অন্য নাম বা ক্যাটাগরি চেষ্টা করুন।"; grid.appendChild(d); }
+}
+function buildChips(el, list, cur, cb){
+ el.innerHTML = list.map(function(x){ return '<button type="button" class="chip'+(x===cur?" on":"")+'" data-v="'+x+'">'+(x==="All"?"সব":x)+'</button>'; }).join("");
+ Array.prototype.forEach.call(el.querySelectorAll(".chip"), function(ch){ ch.addEventListener("click", function(){ cb(ch.getAttribute("data-v")); }); });
+}
+function renderChips(){
+ buildChips($("#cat-chips"), CAT_CHIPS, curCat, function(v){ curCat=v; renderChips(); applyFilters(); });
+ buildChips($("#lvl-chips"), LVL_CHIPS, curLvl, function(v){ curLvl=v; renderChips(); applyFilters(); });
+}
+$("#search").addEventListener("input", function(e){ curSearch=e.target.value.trim().toLowerCase(); applyFilters(); });
+
+/* ---------- question preparation ---------- */
+function prepareItem(quiz, qi, doShuffle){
+ var raw = quiz.questions[qi];
+ if(raw && raw.t===1){ return { quizId:quiz.id, qi:qi, type:"text", q:raw.q, accept:raw.a, exp:raw.e, cat:quiz.cat, lvl:quiz.level, title:quiz.title }; }
+ var order=[0,1,2,3]; if(doShuffle) order=shuffleArr(order);
+ var opts=order.map(function(i){ return raw[1][i]; });
+ return { quizId:quiz.id, qi:qi, type:"mcq", q:raw[0], opts:opts, ans:order.indexOf(raw[2]), correctText:raw[1][raw[2]], exp:raw[3], cat:quiz.cat, lvl:quiz.level, title:quiz.title };
+}
+function allItems(doShuffle){
+ var pool=[]; QUIZZES.forEach(function(q){ q.questions.forEach(function(_,i){ pool.push(prepareItem(q,i,doShuffle)); }); }); return pool;
+}
+
+/* ---------- setup ---------- */
+var setupQuiz=null, setupCount=15, setupMode="practice", setupShuffle=true;
+function openSetup(id){
+ setupQuiz=quizById(id); if(!setupQuiz) return;
+ $("#setup-icon").textContent=setupQuiz.icon;
+ $("#setup-title").textContent=setupQuiz.title;
+ $("#setup-meta").textContent=setupQuiz.cat+" • "+setupQuiz.level+" • মোট "+setupQuiz.questions.length+"টি প্রশ্ন (প্রতিটিতে ব্যাখ্যা)";
+ $("#setup-best").textContent= S.best[id] ? "🏆 আপনার সেরা স্কোর: "+S.best[id] : "";
+ var hasResume = S.resume && S.resume.quizId===id;
+ $("#btn-resume").style.display = hasResume? "" : "none";
+ showView("setup");
+}
+function segWire(id, cb){
+ Array.prototype.forEach.call(document.querySelectorAll("#"+id+" button"), function(b){
+  b.addEventListener("click", function(){ Array.prototype.forEach.call(document.querySelectorAll("#"+id+" button"), function(x){ x.classList.remove("on"); }); b.classList.add("on"); cb(b.getAttribute("data-v")); });
+ });
+}
+segWire("setup-count", function(v){ setupCount = v==="all" ? "all" : parseInt(v,10); });
+segWire("setup-mode", function(v){ setupMode=v; });
+$("#setup-shuffle").addEventListener("change", function(e){ setupShuffle=e.target.checked; });
+$("#btn-start").addEventListener("click", function(){
+ if(!setupQuiz) return;
+ var idxs = setupQuiz.questions.map(function(_,i){ return i; });
+ if(setupShuffle) idxs=shuffleArr(idxs);
+ var n = setupCount==="all" ? idxs.length : Math.min(setupCount, idxs.length);
+ var items = idxs.slice(0,n).map(function(i){ return prepareItem(setupQuiz,i,setupShuffle); });
+ if(S.resume && S.resume.quizId===setupQuiz.id){ S.resume=null; save(); }
+ startSession({ kind:"quiz", quizId:setupQuiz.id, title:setupQuiz.title, items:items, mode:setupMode });
+});
+$("#btn-resume").addEventListener("click", function(){
+ if(S.resume && setupQuiz && S.resume.quizId===setupQuiz.id){
+   var r=S.resume; startSession({ kind:"quiz", quizId:r.quizId, title:quizById(r.quizId).title, items:r.items, mode:r.mode, idx:r.idx, results:r.results });
+ }
+});
+
+/* ---------- quiz engine ---------- */
+var SES=null, qTimerInt=null, qAutoTo=null, blitzInt=null;
+function stopAllTimers(){ if(qTimerInt){ clearInterval(qTimerInt); qTimerInt=null; } if(qAutoTo){ clearTimeout(qAutoTo); qAutoTo=null; } if(blitzInt){ clearInterval(blitzInt); blitzInt=null; } if(spInt){ clearInterval(spInt); spInt=null; } if(typeof examInt!=="undefined" && examInt){ clearInterval(examInt); examInt=null; } }
+
+function startSession(cfg){
+ stopAllTimers(); examSec=0;
+ SES={ kind:cfg.kind, quizId:cfg.quizId||null, title:cfg.title, items:cfg.items, mode:cfg.mode||"practice",
+       idx:cfg.idx||0, results:cfg.results||[], answered:false, startAt:Date.now(),
+       combo:0, bestCombo:0, xp:0, blitzLeft:60, clearedNow:0 };
+ showView("quiz");
+ if(SES.kind==="blitz"){ startBlitzClock(); }
+ renderQuestion();
+}
+function startBlitzClock(){
+ $("#q-timebar").style.display="block";
+ blitzInt=setInterval(function(){
+   SES.blitzLeft--;
+   $("#q-timer").textContent="⚡ "+SES.blitzLeft+"s";
+   $("#q-timefill").style.width=(SES.blitzLeft/60*100)+"%";
+   if(SES.blitzLeft<=0){ finishSession(); }
+ },1000);
+ $("#q-timer").textContent="⚡ 60s";
+}
+function segbarRender(){
+ var bar=$("#q-segbar");
+ if(SES.kind==="blitz"){ bar.innerHTML = SES.results.map(function(r){ return '<i class="'+(r.ok?"ok":"bad")+'"></i>'; }).join("") || '<i></i>'; return; }
+ bar.innerHTML = SES.items.map(function(_,i){
+   var cls=""; if(SES.results[i]) cls=SES.results[i].ok?"ok":"bad"; else if(i===SES.idx) cls="cur";
+   return '<i class="'+cls+'"></i>';
+ }).join("");
+}
+function renderQuestion(){
+ if(!SES) return;
+ if(SES.idx>=SES.items.length){ finishSession(); return; }
+ SES.answered=false;
+ var it=SES.items[SES.idx];
+ segbarRender();
+ $("#q-count").textContent = SES.kind==="blitz" ? ("সঠিক: "+SES.results.filter(function(r){return r.ok;}).length+" • চেষ্টা: "+SES.results.length) : ("Question "+(SES.idx+1)+" of "+SES.items.length);
+ $("#q-cat").textContent = it.title+" • "+it.cat;
+ $("#q-lvl").textContent = it.lvl;
+ $("#q-text").textContent = it.q;
+ $("#q-combo").textContent = (SES.kind==="blitz" && SES.combo>=2) ? ("🔥 Combo x"+(SES.combo>=3?2:1)+" • টানা "+SES.combo+"টি সঠিক") : "";
+ $("#q-explain").className="explain"; $("#q-explain").innerHTML="";
+ $("#btn-next").style.display="none";
+ var optsBox=$("#q-opts"), typeWrap=$("#q-typewrap");
+ if(it.type==="text"){
+   optsBox.innerHTML=""; optsBox.style.display="none"; typeWrap.style.display="block";
+   var inp=$("#q-typein"); inp.value=""; inp.className="typein"; inp.disabled=false;
+   $("#btn-check-type").disabled=false;
+   setTimeout(function(){ try{ inp.focus(); }catch(e){} },60);
+ } else {
+   typeWrap.style.display="none"; optsBox.style.display="grid";
+   optsBox.innerHTML = it.opts.map(function(o,i){
+     return '<button type="button" class="opt" data-i="'+i+'"><span class="key">'+(i+1)+'</span><span>'+escapeHtml(o)+'</span></button>';
+   }).join("");
+   Array.prototype.forEach.call(optsBox.querySelectorAll(".opt"), function(b){
+     b.addEventListener("click", function(){ answerMCQ(parseInt(b.getAttribute("data-i"),10)); });
+   });
+ }
+ if(SES.mode==="timed" && SES.kind!=="blitz"){ startPerQTimer(); }
+ else if(SES.kind!=="blitz"){ $("#q-timebar").style.display="none"; $("#q-timer").textContent = SES.mode==="exam" ? ("⏱ মোট সময়: 0:00") : ""; if(SES.mode==="exam") startExamClock(); }
+}
+function escapeHtml(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+var examInt=null, examSec=0;
+function startExamClock(){
+ if(examInt) return;
+ examInt=setInterval(function(){ if(!SES){ clearInterval(examInt); examInt=null; return; } examSec++; $("#q-timer").textContent="⏱ মোট সময়: "+Math.floor(examSec/60)+":"+String(examSec%60).padStart(2,"0"); },1000);
+}
+function startPerQTimer(){
+ $("#q-timebar").style.display="block";
+ var left=30; $("#q-timer").textContent="⏱ "+left+"s"; $("#q-timefill").style.width="100%";
+ if(qTimerInt) clearInterval(qTimerInt);
+ qTimerInt=setInterval(function(){
+   left-=0.25;
+   if(left<=0){ clearInterval(qTimerInt); qTimerInt=null; $("#q-timer").textContent="⏱ 0s"; $("#q-timefill").style.width="0%"; onTimeout(); return; }
+   $("#q-timer").textContent="⏱ "+Math.ceil(left)+"s"; $("#q-timefill").style.width=(left/30*100)+"%";
+ },250);
+}
+function recordResult(ok, chosenText, correctText){
+ var it=SES.items[SES.idx];
+ SES.results[SES.idx]={ ok:ok, chosen:chosenText, correct:correctText, q:it.q, exp:it.exp };
+ S.answered++; if(ok) S.correct++; touchStreak();
+ if(SES.kind==="blitz"){
+   if(ok){ SES.combo++; SES.bestCombo=Math.max(SES.bestCombo,SES.combo); SES.xp += SES.combo>=3?20:10; }
+   else SES.combo=0;
+ }
+ if(!ok && it.quizId){
+   var key=it.quizId+"#"+it.qi;
+   if(SES.kind==="mistakes"){ if(S.mistakes[key]) S.mistakes[key].s=0; }
+   else if(!S.mistakes[key]) S.mistakes[key]={s:0};
+ }
+ if(ok && SES.kind==="mistakes" && it.quizId){
+   var k2=it.quizId+"#"+it.qi;
+   if(S.mistakes[k2]){ S.mistakes[k2].s++; if(S.mistakes[k2].s>=2){ delete S.mistakes[k2]; SES.clearedNow++; toast("🧹 একটি ভুল শুধরে ফেললেন! টানা 2 বার সঠিক ✓"); } }
+ }
+ save();
+}
+function revealMCQ(chosenIdx){
+ var it=SES.items[SES.idx];
+ Array.prototype.forEach.call($("#q-opts").querySelectorAll(".opt"), function(b){
+   var i=parseInt(b.getAttribute("data-i"),10); b.disabled=true;
+   if(i===it.ans) b.classList.add("correct");
+   else if(i===chosenIdx) b.classList.add("wrong");
+ });
+}
+function showExplain(html){ var e=$("#q-explain"); e.innerHTML=html; e.classList.add("show"); }
+function answerMCQ(i){
+ if(!SES || SES.answered) return;
+ var it=SES.items[SES.idx]; if(it.type!=="mcq") return;
+ SES.answered=true;
+ if(qTimerInt){ clearInterval(qTimerInt); qTimerInt=null; }
+ var ok = i===it.ans;
+ recordResult(ok, it.opts[i], it.correctText);
+ revealMCQ(i);
+ if(SES.kind==="blitz"){ setTimeout(nextQuestion, 350); return; }
+ if(SES.mode==="exam"){ setTimeout(nextQuestion, 250); return; }
+ showExplain((ok?"✅ <b>সঠিক!</b> ":"❌ <b>ভুল।</b> সঠিক উত্তর: <b>"+escapeHtml(it.correctText)+"</b><br>")+"💡 "+escapeHtml(it.exp));
+ $("#btn-next").style.display=""; $("#btn-next").textContent = SES.idx>=SES.items.length-1 ? "ফলাফল দেখুন ✓" : "Next →";
+ segbarRender();
+}
+function answerText(){
+ if(!SES || SES.answered) return;
+ var it=SES.items[SES.idx]; if(it.type!=="text") return;
+ var val=$("#q-typein").value.trim().toLowerCase();
+ if(!val){ toast("✍️ আগে উত্তর টাইপ করুন"); return; }
+ SES.answered=true;
+ if(qTimerInt){ clearInterval(qTimerInt); qTimerInt=null; }
+ var ok = it.accept.some(function(a){ return a.toLowerCase()===val; });
+ recordResult(ok, $("#q-typein").value.trim(), it.accept[0]);
+ var inp=$("#q-typein"); inp.disabled=true; inp.classList.add(ok?"correct":"wrong");
+ $("#btn-check-type").disabled=true;
+ if(SES.mode==="exam"){ setTimeout(nextQuestion, 250); return; }
+ showExplain((ok?"✅ <b>সঠিক!</b> ":"❌ <b>ভুল।</b> সঠিক উত্তর: <b>"+escapeHtml(it.accept[0])+"</b><br>")+"💡 "+escapeHtml(it.exp));
+ $("#btn-next").style.display=""; $("#btn-next").textContent = SES.idx>=SES.items.length-1 ? "ফলাফল দেখুন ✓" : "Next →";
+ segbarRender();
+}
+function onTimeout(){
+ if(!SES || SES.answered) return;
+ var it=SES.items[SES.idx]; SES.answered=true;
+ if(it.type==="mcq"){ recordResult(false,"(সময় শেষ)",it.correctText); revealMCQ(-1); }
+ else { recordResult(false,"(সময় শেষ)",it.accept[0]); $("#q-typein").disabled=true; $("#btn-check-type").disabled=true; }
+ showExplain("⏰ <b>সময় শেষ!</b> সঠিক উত্তর: <b>"+escapeHtml(it.type==="mcq"?it.correctText:it.accept[0])+"</b><br>💡 "+escapeHtml(it.exp));
+ segbarRender();
+ qAutoTo=setTimeout(nextQuestion, 2200);
+}
+function nextQuestion(){
+ if(qAutoTo){ clearTimeout(qAutoTo); qAutoTo=null; }
+ if(!SES) return;
+ SES.idx++;
+ if(SES.kind==="blitz"){ if(SES.blitzLeft<=0){ finishSession(); return; } SES.items.push(allItems(true)[Math.floor(Math.random()*240)]); renderQuestion(); return; }
+ renderQuestion();
+}
+$("#btn-next").addEventListener("click", nextQuestion);
+$("#btn-check-type").addEventListener("click", answerText);
+$("#btn-quit").addEventListener("click", function(){
+ if(!SES) return;
+ askConfirm("কুইজ ছেড়ে যাবেন?", SES.kind==="quiz" ? "আপনার অগ্রগতি সেভ থাকবে — এই কুইজ আবার খুললেই Resume করে আগের জায়গা থেকে চালিয়ে যেতে পারবেন।" : "এই সেশনটি শেষ হয়ে যাবে এবং অগ্রগতি সেভ হবে না।", function(){
+   if(SES && SES.kind==="quiz"){ S.resume={ quizId:SES.quizId, items:SES.items, idx:SES.idx, results:SES.results, mode:SES.mode }; save(); }
+   stopAllTimers(); if(examInt){ clearInterval(examInt); examInt=null; } SES=null; showView("home");
+ });
+});
+document.addEventListener("keydown", function(e){
+ if(!SES || !$("#view-quiz").classList.contains("on")) return;
+ var it=SES.items[SES.idx]; if(!it) return;
+ if(e.key>="1" && e.key<="4" && it.type==="mcq" && !SES.answered){ answerMCQ(parseInt(e.key,10)-1); }
+ else if(e.key==="Enter"){ if(SES.answered && $("#btn-next").style.display!=="none") nextQuestion(); else if(!SES.answered && it.type==="text" && document.activeElement!==$("#q-typein")) answerText(); }
+});
+
+/* ---------- finish & results ---------- */
+function finishSession(){
+ stopAllTimers(); if(examInt){ clearInterval(examInt); examInt=null; }
+ if(!SES) return;
+ var total = SES.kind==="blitz" ? SES.results.length : SES.items.length;
+ var correct = SES.results.filter(function(r){ return r && r.ok; }).length;
+ var pct = total>0 ? Math.round(correct/total*100) : 0;
+ var xpGain;
+ if(SES.kind==="blitz"){ xpGain=SES.xp; }
+ else { xpGain = correct*10 + (pct===100?100:(pct>=80?50:0)); }
+ S.xp += xpGain;
+ if(SES.kind==="quiz" && SES.quizId){
+   var prev=S.best[SES.quizId]; var cur=correct+"/"+total;
+   if(!prev || parseInt(prev.split("/")[0],10)/parseInt(prev.split("/")[1],10) < correct/Math.max(1,total)) S.best[SES.quizId]=cur;
+   if(S.completed.indexOf(SES.quizId)<0) S.completed.push(SES.quizId);
+   if(S.resume && S.resume.quizId===SES.quizId) S.resume=null;
+ }
+ if(SES.kind==="daily"){ S.dailyDay=todayStr(); }
+ save();
+ var ctx={ pct:pct, total:total, blitzBest: SES.kind==="blitz"?correct:0, daily: SES.kind==="daily" };
+ checkBadges(ctx);
+
+ $("#r-title").textContent = SES.kind==="blitz" ? "⚡ Speed Blitz — ফলাফল" : SES.kind==="mock" ? "🎲 Mixed Mock — ফলাফল" : SES.kind==="daily" ? "📅 Daily Challenge — ফলাফল" : SES.kind==="mistakes" ? "❤️‍🩹 Mistakes Practice — ফলাফল" : "🏁 "+SES.title+" — ফলাফল";
+ $("#r-score").textContent = correct+"/"+total;
+ var msg = SES.kind==="blitz" ? (correct>=10?"অসাধারণ গতি! ⚡ Speedster-এর মতো পারফরম্যান্স!":correct>=5?"ভালো গতি! আরও প্র্যাক্টিসে আরও দ্রুত হবেন।":"চমৎকার শুরু! গতি বাড়াতে Blitz আবার খেলুন।")
+   : pct===100 ? "নিখুঁত! 💯 আপনি এই টপিকে পুরোপুরি প্রস্তুত।"
+   : pct>=80 ? "দারুণ! 🎉 Band 8-এর পথে শক্ত অবস্থান।"
+   : pct>=60 ? "ভালো হচ্ছে! 👍 ভুলগুলো রিভিউ করে আবার চেষ্টা করুন।"
+   : pct>=40 ? "চালিয়ে যান! 💪 ব্যাখ্যাগুলো পড়ে My Mistakes প্র্যাক্টিস করুন।"
+   : "হাল ছাড়বেন না! 🌱 ব্যাখ্যাগুলো মন দিয়ে পড়ে আবার চেষ্টা করুন।";
+ if(SES.kind==="mistakes") msg += " এই সেশনে "+SES.clearedNow+"টি ভুল পুরোপুরি শুধরানো হয়েছে। বাকি জমা ভুল: "+mistakeCount()+"টি।";
+ $("#r-msg").textContent = msg+" ("+pct+"%)";
+ $("#r-xp").textContent = "⭐ +"+xpGain+" XP অর্জন করেছেন! (মোট: "+S.xp+" XP)";
+ var bandBox=$("#r-band");
+ if(SES.kind==="mock"){ bandBox.style.display="block"; $("#r-bandval").textContent=bandOf(pct); } else bandBox.style.display="none";
+ $("#r-review").innerHTML = SES.items.slice(0, SES.kind==="blitz"?SES.results.length:SES.items.length).map(function(it,i){
+   var r=SES.results[i]; if(!r) return "";
+   return '<div class="ritem"><div class="rq">'+(i+1)+'. '+escapeHtml(it.q)+'</div>'
+     +'<div>আপনার উত্তর: <span class="'+(r.ok?"ok":"bad")+'">'+escapeHtml(r.chosen||"—")+'</span>'+(r.ok?" ✓":" ✗")+'</div>'
+     +(r.ok?"":'<div>সঠিক উত্তর: <span class="ok">'+escapeHtml(r.correct)+'</span></div>')
+     +'<div class="re">💡 '+escapeHtml(r.exp)+'</div></div>';
+ }).join("");
+ var doneSES=SES; SES=null;
+ showView("result");
+ if(pct>=80 && SES===null && !reducedMotion) confettiBurst();
+ $("#btn-nextquiz").style.display = doneSES.kind==="quiz" ? "" : "none";
+ window._lastKind=doneSES.kind; window._lastQuizId=doneSES.quizId;
+}
+$("#btn-again").addEventListener("click", function(){
+ if(window._lastKind==="quiz" && window._lastQuizId) openSetup(window._lastQuizId);
+ else if(window._lastKind==="mock") startMock();
+ else if(window._lastKind==="blitz") startBlitz();
+ else if(window._lastKind==="daily") startDaily();
+ else if(window._lastKind==="mistakes") startMistakes();
+ else showView("home");
+});
+$("#btn-nextquiz").addEventListener("click", function(){
+ var ids=QUIZZES.map(function(q){ return q.id; }); var i=ids.indexOf(window._lastQuizId);
+ openSetup(ids[(i+1)%ids.length]);
+});
+$("#btn-gomistakes").addEventListener("click", function(){ openMistakes(); });
+
+/* ---------- confetti ---------- */
+function confettiBurst(){
+ var cv=$("#confetti"), ctx=cv.getContext("2d");
+ cv.width=window.innerWidth; cv.height=window.innerHeight; cv.style.display="block";
+ var colors=["#d4af6a","#2bb896","#f59e0b","#34c759","#eef2fb"];
+ var parts=[]; for(var i=0;i<140;i++){ parts.push({ x:Math.random()*cv.width, y:-20-Math.random()*cv.height*0.4, w:6+Math.random()*7, h:8+Math.random()*8, vy:2+Math.random()*3.5, vx:-1.5+Math.random()*3, rot:Math.random()*Math.PI, vr:-0.1+Math.random()*0.2, c:colors[i%colors.length] }); }
+ var start=Date.now();
+ (function frame(){
+   ctx.clearRect(0,0,cv.width,cv.height);
+   parts.forEach(function(p){ p.y+=p.vy; p.x+=p.vx; p.rot+=p.vr; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.c; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore(); });
+   if(Date.now()-start<2600) requestAnimationFrame(frame); else { ctx.clearRect(0,0,cv.width,cv.height); cv.style.display="none"; }
+ })();
+}
+
+/* ---------- special modes ---------- */
+function startMock(){
+ var pool=shuffleArr(allItems(true)).slice(0,20);
+ startSession({ kind:"mock", title:"Mixed Mock Test", items:pool, mode:"exam" });
+ toast("🎲 Mock শুরু! পরীক্ষার পরিবেশ — ব্যাখ্যা ফলাফলের পরে দেখা যাবে।");
+}
+function startBlitz(){
+ var pool=allItems(true);
+ startSession({ kind:"blitz", title:"Speed Blitz", items:[pool[Math.floor(Math.random()*pool.length)]], mode:"practice" });
+}
+function startDaily(){
+ var t=todayStr(); var seed=0; for(var i=0;i<t.length;i++) seed=(seed*31+t.charCodeAt(i))|0;
+ var rand=mulberry32(seed);
+ var pool=[]; QUIZZES.forEach(function(q){ q.questions.forEach(function(_,i){ pool.push([q,i]); }); });
+ pool=seedShuffle(pool,rand).slice(0,10);
+ var items=pool.map(function(p){ var it=prepareItem(p[0],p[1],false); var order=[0,1,2,3];
+   if(it.type==="mcq"){ var sh=seedShuffle(order,rand); var oldOpts=it.opts.slice(); it.opts=sh.map(function(j){ return oldOpts[j]; }); it.ans=sh.indexOf(it.ans); }
+   return it; });
+ startSession({ kind:"daily", title:"Daily Challenge", items:items, mode:"practice" });
+}
+function startMistakes(){
+ var keys=Object.keys(S.mistakes);
+ if(!keys.length){ toast("🎉 কোনো ভুল জমা নেই — দারুণ!"); return; }
+ var items=keys.map(function(k){ var parts=k.split("#"); var q=quizById(parts[0]); return prepareItem(q, parseInt(parts[1],10), true); });
+ items=shuffleArr(items);
+ startSession({ kind:"mistakes", title:"My Mistakes", items:items, mode:"practice" });
+}
+function openSpecial(key){
+ if(key==="daily"){ if(S.dailyDay===todayStr()){ askConfirm("আজকের চ্যালেঞ্জ সম্পন্ন ✓","আপনি আজকের Daily Challenge ইতিমধ্যে শেষ করেছেন। আবার প্র্যাক্টিস করতে চান? (ব্যাজ একবারই পাওয়া যায়)", function(){ startDaily(); }); } else startDaily(); }
+ else if(key==="mock") startMock();
+ else if(key==="blitz") startBlitz();
+ else if(key==="flash") openFlash();
+ else if(key==="mistakes") openMistakes();
+ else if(key==="reading") openPassage("reading",0);
+ else if(key==="listening") openPassage("listening",0);
+ else if(key==="speaking"){ renderSpeaking(1); showView("speaking"); }
+}
+
+/* ---------- mistakes list view ---------- */
+function openMistakes(){
+ var keys=Object.keys(S.mistakes);
+ var box=$("#mistake-list");
+ if(!keys.length){ box.innerHTML='<div class="empty-note">🎉 এখন কোনো ভুল জমা নেই। কুইজে ভুল করলেই প্রশ্ন এখানে জমা হবে।</div>'; }
+ else box.innerHTML = keys.map(function(k){
+   var parts=k.split("#"); var q=quizById(parts[0]); var raw=q.questions[parseInt(parts[1],10)];
+   var qtext = raw.t===1 ? raw.q : raw[0];
+   var streak=S.mistakes[k].s;
+   return '<div class="ritem"><div class="rq">'+escapeHtml(qtext)+'</div><div class="re">'+q.icon+" "+q.title+' • শুধরানোর ধারাবাহিকতা: '+'⭐'.repeat(streak)+'☆'.repeat(2-streak)+' (টানা 2 বার সঠিক হলেই মুছবে)</div></div>';
+ }).join("");
+ $("#btn-mistake-practice").style.display = keys.length? "" : "none";
+ showView("mistakes");
+}
+$("#btn-mistake-practice").addEventListener("click", startMistakes);
+
+/* ---------- flashcards ---------- */
+var deck=[], deckIdx=0, deckKnown={};
+function openFlash(){
+ deck=shuffleArr(FLASHCARDS.map(function(_,i){ return i; })); deckIdx=0; deckKnown={};
+ showView("flash"); renderFlash();
+}
+function renderFlash(){
+ var total=FLASHCARDS.length, known=Object.keys(deckKnown).length;
+ $("#deck-fill").style.width=(known/total*100)+"%";
+ $("#deck-count").textContent="কার্ড "+Math.min(deckIdx+1,total)+" / "+total+" • জানা আছে: "+known+"টি";
+ if(deckIdx>=deck.length){ $("#flash-front").textContent="🎉 সব কার্ড শেষ!"; $("#flash-back").textContent="দারুণ কাজ!"; $("#flash-ex").textContent="চাইলে আবার হোম থেকে শুরু করে রিভিশন দিন।"; $("#flash-done").textContent="✓ Deck সম্পন্ন — জানা কার্ড: "+known+"/"+total; return; }
+ var c=FLASHCARDS[deck[deckIdx]];
+ $("#flash-front").textContent=c[0]; $("#flash-back").textContent=c[1]; $("#flash-ex").textContent="“"+c[2]+"”";
+ $("#flash-card").classList.remove("flip"); $("#flash-done").textContent="";
+}
+$("#flash-card").addEventListener("click", function(){ this.classList.toggle("flip"); });
+$("#flash-card").addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); this.classList.toggle("flip"); } });
+$("#btn-flash-yes").addEventListener("click", function(){
+ if(deckIdx>=deck.length) return;
+ var id=deck[deckIdx];
+ if(!deckKnown[id]){ deckKnown[id]=1; S.xp+=5; S.flashDone=1; save(); }
+ deckIdx++; renderFlash();
+});
+$("#btn-flash-no").addEventListener("click", function(){
+ if(deckIdx>=deck.length) return;
+ deck.push(deck[deckIdx]); deckIdx++; renderFlash();
+});
+
+/* ---------- reading / listening ---------- */
+var pCtx=null;
+function openPassage(kind, setIdx){
+ var sets = kind==="reading" ? READING : LISTENING;
+ var set=sets[setIdx];
+ pCtx={ kind:kind, setIdx:setIdx, set:set, sel:{}, done:false };
+ $("#p-title").textContent=(kind==="reading"?"📖 ":"🎧 ")+set.title;
+ $("#p-sub").textContent= kind==="reading" ? "প্যাসেজটি পড়ুন এবং প্রতিটি বক্তব্য TRUE / FALSE / NOT GIVEN বেছে নিন।" : set.sub;
+ var chipsHtml='<div class="chips" style="margin-bottom:6px">'+sets.map(function(s,i){ return '<button type="button" class="chip'+(i===setIdx?" on":"")+'" data-set="'+i+'">সেট '+(i+1)+'</button>'; }).join("")+'</div>';
+ $("#p-text").innerHTML=chipsHtml+escapeHtml(set.passage).replace(/\n/g,"<br>");
+ Array.prototype.forEach.call($("#p-text").querySelectorAll("[data-set]"), function(b){ b.addEventListener("click", function(){ openPassage(kind, parseInt(b.getAttribute("data-set"),10)); }); });
+ $("#p-result").textContent="";
+ $("#p-qs").innerHTML = set.questions.map(function(q,i){
+   if(kind==="reading"){
+     return '<div class="promptcard"><div class="pq">'+(i+1)+'. '+escapeHtml(q[0])+'</div><div class="tfng" data-q="'+i+'">'+TFNG.map(function(t,ti){ return '<button type="button" data-v="'+ti+'">'+t+'</button>'; }).join("")+'</div><div class="explain" id="pexp-'+i+'"></div></div>';
+   }
+   return '<div class="promptcard"><div class="pq">'+(i+1)+'. '+escapeHtml(q[0])+'</div><div class="opts" style="margin-top:10px" data-q="'+i+'">'+q[1].map(function(o,oi){ return '<button type="button" class="opt" data-v="'+oi+'"><span class="key">'+(oi+1)+'</span><span>'+escapeHtml(o)+'</span></button>'; }).join("")+'</div><div class="explain" id="pexp-'+i+'"></div></div>';
+ }).join("");
+ Array.prototype.forEach.call($("#p-qs").querySelectorAll("[data-q]"), function(group){
+   var qi=parseInt(group.getAttribute("data-q"),10);
+   Array.prototype.forEach.call(group.querySelectorAll("button"), function(b){
+     b.addEventListener("click", function(){
+       if(pCtx.done) return;
+       pCtx.sel[qi]=parseInt(b.getAttribute("data-v"),10);
+       Array.prototype.forEach.call(group.querySelectorAll("button"), function(x){ x.classList.remove("on"); x.style.borderColor=""; });
+       b.classList.add("on"); b.style.borderColor="var(--gold)";
+     });
+   });
+ });
+ showView("passage");
+}
+$("#btn-p-reset").addEventListener("click", function(){ if(pCtx) openPassage(pCtx.kind, pCtx.setIdx); });
+$("#btn-p-check").addEventListener("click", function(){
+ if(!pCtx || pCtx.done) return;
+ var set=pCtx.set, total=set.questions.length, answered=Object.keys(pCtx.sel).length;
+ if(answered<total){ toast("✍️ আগে সব "+total+"টি প্রশ্নের উত্তর বেছে নিন ("+answered+"টি হয়েছে)"); return; }
+ pCtx.done=true; var correct=0;
+ set.questions.forEach(function(q,i){
+   var ok = pCtx.sel[i]===q[1]; if(ok) correct++;
+   var group=document.querySelector('#p-qs [data-q="'+i+'"]');
+   Array.prototype.forEach.call(group.querySelectorAll("button"), function(b){
+     var v=parseInt(b.getAttribute("data-v"),10); b.disabled=true; b.classList.remove("on");
+     if(v===q[1]){ b.classList.add("correct"); b.style.borderColor="var(--green)"; }
+     else if(v===pCtx.sel[i]){ b.classList.add("wrong"); b.style.borderColor="var(--red)"; }
+   });
+   var ex=document.getElementById("pexp-"+i);
+   ex.innerHTML=(pCtx.kind==="reading"? q[2] : q[2]); ex.classList.add("show");
+ });
+ var xp=correct*10; S.xp+=xp; S.answered+=total; S.correct+=correct; touchStreak(); save(); checkBadges({pct:Math.round(correct/total*100), total:total});
+ $("#p-result").textContent="ফলাফল: "+correct+"/"+total+" সঠিক • ⭐ +"+xp+" XP";
+ if(correct/total>=0.8 && !reducedMotion) confettiBurst();
+ toast("✓ যাচাই সম্পন্ন: "+correct+"/"+total+" সঠিক");
+});
+
+/* ---------- speaking ---------- */
+var spPart=1, spInt=null, spPhase=0, spLeft=0;
+function renderSpeaking(part){
+ spPart=part;
+ Array.prototype.forEach.call($("#sp-chips .chip"), function(c){ c.classList.toggle("on", parseInt(c.getAttribute("data-part"),10)===part); });
+ $("#sp-timer").style.display = part===2 ? "block" : "none";
+ var list=$("#sp-list");
+ if(part===1){
+   list.innerHTML = SPEAKING[1].map(function(q,i){
+     return '<div class="promptcard"><div class="pq">'+(i+1)+'. '+escapeHtml(q)+'</div>'+starsHtml("1-"+i)+'</div>';
+   }).join("");
+ } else if(part===2){
+   list.innerHTML = SPEAKING[2].map(function(c,i){
+     var parts=c[1].split(":"); var bullets=parts.length>1? parts.slice(1).join(":") : "";
+     var items=bullets? bullets.split(",").map(function(x){ return x.trim(); }).filter(Boolean) : [];
+     return '<div class="promptcard"><div class="pq">'+(i+1)+'. '+escapeHtml(c[0])+'</div>'+(items.length? '<ul>'+items.map(function(x){ return "<li>"+escapeHtml(x.replace(/\.$/,""))+"</li>"; }).join("")+'</ul><p style="color:var(--muted);font-size:13.5px;margin-top:6px">'+escapeHtml(parts[0])+':</p>' : "")+starsHtml("2-"+i)+'</div>';
+   }).join("");
+ } else {
+   list.innerHTML = SPEAKING[3].map(function(q,i){
+     return '<div class="promptcard"><div class="pq">'+(i+1)+'. '+escapeHtml(q)+'</div>'+starsHtml("3-"+i)+'</div>';
+   }).join("");
+ }
+ wireStars();
+}
+function starsHtml(key){
+ var r=S.spRate[key]||0;
+ var h='<div class="stars" data-key="'+key+'">';
+ for(var i=1;i<=5;i++) h+='<button type="button" data-star="'+i+'" class="'+(i<=r?"lit":"")+'" aria-label="'+i+' star">⭐</button>';
+ return h+'</div>';
+}
+function wireStars(){
+ Array.prototype.forEach.call($$("#sp-list .stars"), function(row){
+   var key=row.getAttribute("data-key");
+   Array.prototype.forEach.call(row.querySelectorAll("button"), function(b){
+     b.addEventListener("click", function(){
+       var v=parseInt(b.getAttribute("data-star"),10); S.spRate[key]=v; save();
+       Array.prototype.forEach.call(row.querySelectorAll("button"), function(x){ x.classList.toggle("lit", parseInt(x.getAttribute("data-star"),10)<=v); });
+       toast("⭐ নিজের রেটিং সেভ হয়েছে: "+v+"/5");
+     });
+   });
+ });
+}
+Array.prototype.forEach.call($("#sp-chips .chip"), function(c){ c.addEventListener("click", function(){ if(spInt){ clearInterval(spInt); spInt=null; } renderSpeaking(parseInt(c.getAttribute("data-part"),10)); }); });
+function spTick(){
+ spLeft--;
+ if(spLeft<0){
+   if(spPhase===0){ spPhase=1; spLeft=120; $("#sp-phase").textContent="বলার সময় (Talk) — 2 মিনিট"; toast("🎤 প্রস্তুতি শেষ! এখন বলা শুরু করুন"); }
+   else { clearInterval(spInt); spInt=null; $("#sp-phase").textContent="সময় শেষ! ✓"; $("#sp-time").textContent="0:00"; toast("⏱ Part 2 টাইমার শেষ"); return; }
+ }
+ $("#sp-time").textContent=Math.floor(spLeft/60)+":"+String(spLeft%60).padStart(2,"0");
+}
+$("#btn-sp-start").addEventListener("click", function(){
+ if(spInt) clearInterval(spInt);
+ spPhase=0; spLeft=60; $("#sp-phase").textContent="প্রস্তুতির সময় (Prep) — নোট নিন"; $("#sp-time").textContent="1:00";
+ spInt=setInterval(spTick,1000);
+});
+$("#btn-sp-stop").addEventListener("click", function(){ if(spInt){ clearInterval(spInt); spInt=null; } $("#sp-phase").textContent="টাইমার থামানো হয়েছে"; });
+
+/* ---------- backup / restore / export / reset ---------- */
+$("#btn-backup").addEventListener("click", function(){
+ var blob=new Blob([JSON.stringify(S,null,2)],{type:"application/json"});
+ var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="ielts-quiz-arena-backup.json";
+ document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },400);
+ toast("⬇️ ব্যাকআপ ডাউনলোড হচ্ছে");
+});
+$("#btn-restore").addEventListener("click", function(){ $("#restore-file").click(); });
+$("#restore-file").addEventListener("change", function(e){
+ var f=e.target.files[0]; if(!f) return;
+ var reader=new FileReader();
+ reader.onload=function(){
+   try{ var p=JSON.parse(reader.result); if(typeof p.xp!=="number" || !p.mistakes) throw new Error("bad");
+     var fresh=freshState(); for(var k in fresh){ if(p[k]===undefined) p[k]=fresh[k]; }
+     S=p; save(); renderHome(); toast("⬆️ ব্যাকআপ রিস্টোর সফল হয়েছে ✓");
+   }catch(err){ toast("⚠️ ফাইলটি সঠিক ব্যাকআপ নয়"); }
+ };
+ reader.readAsText(f); e.target.value="";
+});
+$("#btn-export").addEventListener("click", function(){
+ var acc=S.answered>0?Math.round(S.correct/S.answered*100):0;
+ var txt="🎯 IELTS Quiz Arena — আমার অগ্রগতি\n⭐ XP: "+S.xp+" (লেভেল: "+levelOf(S.xp).cur.name+")\n🔥 স্ট্রিক: "+displayStreak()+" দিন\n✅ উত্তর দেওয়া: "+S.answered+"টি • Accuracy: "+acc+"%\n🏆 ব্যাজ: "+S.badges.length+"/"+BADGES.length+"\n🗂️ শেষ করা কুইজ: "+S.completed.length+"/16\n❤️‍🩹 জমা ভুল: "+mistakeCount()+"টি\n— Road to Band 8 🚀";
+ function done(){ toast("📋 সারাংশ কপি হয়েছে — যেকোনো জায়গায় পেস্ট করুন"); }
+ if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done, function(){ fallbackCopy(txt); done(); }); }
+ else { fallbackCopy(txt); done(); }
+});
+function fallbackCopy(txt){ var ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); try{ document.execCommand("copy"); }catch(e){} ta.remove(); }
+$("#btn-reset").addEventListener("click", function(){
+ askConfirm("সব প্রোগ্রেস মুছবেন?","XP, ব্যাজ, সেরা স্কোর, স্ট্রিক আর My Mistakes — সবকিছু মুছে যাবে। এই কাজ ফেরানো যাবে না।", function(){
+   S=freshState(); try{ localStorage.removeItem(LS_KEY); }catch(e){} save(); renderHome(); toast("🗑️ সব প্রোগ্রেস মুছে ফেলা হয়েছে");
+ });
+});
+
+/* ---------- init ---------- */
+renderChips();
+renderHome();
+checkBadges({});
+</script>
+</body>
+</html>
